@@ -1,0 +1,12 @@
+# Robots.txt for Beautiva (beautiva.in)
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin
+Disallow: /dashboard/
+Disallow: /dashboard
+Disallow: /checkout
+Disallow: /profile
+Disallow: /orders
+
+Sitemap: https://beautiva.in/sitemap.xml

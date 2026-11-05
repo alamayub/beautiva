@@ -1,0 +1,6 @@
+{
+  "name": "Salonline - Premium Salon & Beauty Services at Home",
+  "description": "Salonline offers doorstep salon, luxury facial, skincare, hair styling, bridal makeup, and certified beauty school courses across Lucknow, Patna, and beyond.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
