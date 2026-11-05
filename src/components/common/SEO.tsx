@@ -15,7 +15,7 @@ export interface SEOProps {
 const DEFAULT_TITLE = 'Beautiva - Premium Salon & Beauty Services at Home';
 const DEFAULT_DESCRIPTION =
   'Beautiva offers doorstep salon, luxury facial, skincare, hair styling, bridal makeup, and certified beauty school courses across Lucknow, Patna, and beyond.';
-const DEFAULT_IMAGE = '/images/salonline_hero_luxury_1792923326581.jpg';
+const DEFAULT_IMAGE = '/images/beautiva_hero_luxury_1792923326581.jpg';
 const BASE_URL = 'https://beautiva.in';
 
 export const SEO: React.FC<SEOProps> = ({

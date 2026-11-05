@@ -19,7 +19,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '4 min read',
     date: '18 Oct 2026',
     author: 'Sunita Rawat, Head Aesthetician',
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     content: [
       'Transitioning between intense humidity and dry autumn air causes sebum imbalances, resulting in clogged pores alongside dehydrated surface patches.',
       'A professional facial such as the VLCC Insta Glow or Lotus WhiteGlow utilizes gentle micro-exfoliation to dissolve dead skin build-up without rupturing the lipid barrier.',
@@ -34,7 +34,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min read',
     date: '10 Oct 2026',
     author: 'Neha Kapoor, Master Bridal Artist',
-    image: '/images/salonline_bridal_makeup_1792923326741.jpg',
+    image: '/images/beautiva_bridal_makeup_1792923326741.jpg',
     content: [
       'Month 1: Focus on scalp wellness and deep conditioning with monthly hair spas, paired with a purifying SARA green apple facial to balance complexion.',
       'Month 2: Introduce targeted brightening treatments such as O3+ Radiant Glow and full-body ubtan polishing to erase accumulated tanning.',
@@ -49,7 +49,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '3 min read',
     date: '25 Sep 2026',
     author: 'Beautiva Quality Team',
-    image: '/images/salonline_hero_luxury_1792923326581.jpg',
+    image: '/images/beautiva_hero_luxury_1792923326581.jpg',
     content: [
       'Cross-contamination in conventional salons often occurs through double-dipping wax spatulas or unsterilized steel blackhead extractors.',
       'At Beautiva, every client receives mono-dose factory-sealed cosmetic kits and virgin single-use wax strips.',

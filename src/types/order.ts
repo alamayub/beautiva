@@ -8,7 +8,7 @@ export interface Address {
   fullName: string;
   phone: string;
   alternatePhone?: string;
-  email: string;
+  email?: string;
   houseFlat: string;
   streetArea: string;
   landmark?: string;
@@ -19,6 +19,8 @@ export interface Address {
   instructions?: string;
 }
 
+export type PaymentOption = 'online' | 'advance' | 'cash';
+
 export interface Order {
   id: string;
   date: string;
@@ -28,6 +30,8 @@ export interface Order {
   discount: number;
   tax: number;
   total: number;
+  paymentMethod?: PaymentOption;
+  advanceAmount?: number;
   status: 'confirmed' | 'technician_assigned' | 'completed' | 'cancelled';
   assignedBeautician?: {
     name: string;

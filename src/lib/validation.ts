@@ -4,7 +4,7 @@ export const checkoutSchema = z.object({
   fullName: z.string().min(3, 'Please enter your full name'),
   phone: z.string().regex(/^[6-9]\d{9}$/, 'Please enter a valid 10-digit Indian phone number'),
   alternatePhone: z.string().optional(),
-  email: z.string().email('Please enter a valid email address'),
+  email: z.string().email('Please enter a valid email address').optional().or(z.literal('')),
   houseFlat: z.string().min(2, 'Flat/House number is required'),
   streetArea: z.string().min(5, 'Street address or locality is required'),
   landmark: z.string().optional(),

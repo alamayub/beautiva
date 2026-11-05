@@ -50,7 +50,7 @@ export const AdminAcademy: React.FC = () => {
       defaultValue: 'all',
       options: [
         { label: 'All Trainees', value: 'all' },
-        { label: 'Inducted in Fleet', value: 'placed_salonline' },
+        { label: 'Inducted in Fleet', value: 'placed_beautiva' },
         { label: 'In Training', value: 'pending' },
       ],
       onChange: setPlacementFilter,
@@ -86,7 +86,7 @@ export const AdminAcademy: React.FC = () => {
     setIsModalOpen(false);
     setNewName('');
     setNewPhone('');
-    showToast(`Enrolled ${newStudent.studentName} into Salonline Beauty School`);
+    showToast(`Enrolled ${newStudent.studentName} into Beautiva Beauty School`);
   };
 
   const handleAddHours = (studentId: string, hours: number) => {
@@ -111,11 +111,11 @@ export const AdminAcademy: React.FC = () => {
     setStudents((prev) =>
       prev.map((s) =>
         s.id === studentId
-          ? { ...s, placementStatus: 'placed_salonline', progressPercent: 100 }
+          ? { ...s, placementStatus: 'placed_beautiva', progressPercent: 100 }
           : s
       )
     );
-    showToast('Trainee inducted into Salonline verified stylist fleet!');
+    showToast('Trainee inducted into Beautiva verified stylist fleet!');
   };
 
   const columns: ColumnDef<AcademyStudent>[] = [
@@ -186,7 +186,7 @@ export const AdminAcademy: React.FC = () => {
       key: 'placementStatus',
       header: 'Placement Status',
       cell: (s) =>
-        s.placementStatus === 'placed_salonline' ? (
+        s.placementStatus === 'placed_beautiva' ? (
           <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 whitespace-nowrap">
             <CheckCircle2 className="w-3 h-3 text-emerald-600" />
             <span>Inducted in Fleet</span>
@@ -213,7 +213,7 @@ export const AdminAcademy: React.FC = () => {
             label: 'Induct into Stylist Fleet',
             icon: UserCheck,
             onClick: () => handleInductFleet(s.id),
-            disabled: s.placementStatus === 'placed_salonline'
+            disabled: s.placementStatus === 'placed_beautiva'
           },
           {
             label: `Call Student (${s.phone})`,
@@ -227,7 +227,7 @@ export const AdminAcademy: React.FC = () => {
             label: 'Issue Diploma Certificate',
             icon: Award,
             onClick: () => {
-              showToast(`Generated Salonline Beauty School Diploma for ${s.studentName}`);
+              showToast(`Generated Beautiva Beauty School Diploma for ${s.studentName}`);
             }
           }
         ];
@@ -243,7 +243,7 @@ export const AdminAcademy: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-editorial font-bold text-stone-900">
-            Salonline Beauty School · Vocational Trainees
+            Beautiva Beauty School · Vocational Trainees
           </h1>
           <p className="text-xs text-stone-500 mt-1">
             Tracking cosmetology students, practical salon apprenticeships, and doorstep fleet placements.

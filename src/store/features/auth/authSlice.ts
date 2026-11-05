@@ -17,7 +17,7 @@ interface AuthState {
 
 const loadUser = (): UserProfile | null => {
   try {
-    const raw = localStorage.getItem('salonline_user');
+    const raw = localStorage.getItem('beautiva_user');
     if (raw) return JSON.parse(raw);
   } catch {
     // ignore
@@ -38,7 +38,7 @@ export const authSlice = createSlice({
       state.user = { ...action.payload, isLoggedIn: true };
       state.isAuthenticated = true;
       try {
-        localStorage.setItem('salonline_user', JSON.stringify(state.user));
+        localStorage.setItem('beautiva_user', JSON.stringify(state.user));
       } catch {
         // ignore
       }
@@ -47,7 +47,7 @@ export const authSlice = createSlice({
       if (state.user) {
         state.user = { ...state.user, ...action.payload };
         try {
-          localStorage.setItem('salonline_user', JSON.stringify(state.user));
+          localStorage.setItem('beautiva_user', JSON.stringify(state.user));
         } catch {
           // ignore
         }
@@ -57,7 +57,7 @@ export const authSlice = createSlice({
       state.user = null;
       state.isAuthenticated = false;
       try {
-        localStorage.removeItem('salonline_user');
+        localStorage.removeItem('beautiva_user');
       } catch {
         // ignore
       }

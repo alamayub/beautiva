@@ -1,19 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
-  ShoppingBag, 
+  CalendarCheck, 
   Heart, 
   User, 
   Menu, 
   X, 
   Sparkles, 
-  ChevronDown 
+  ChevronDown,
+  MapPin
 } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { openCartDrawer } from '../../store/features/cart/cartSlice';
 import { AnnouncementBar } from './AnnouncementBar';
 import { CartDrawer } from './CartDrawer';
 import { categories } from '../../data/categories';
+import { formatDuration } from '../../lib/duration';
 
 export const Header: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -22,8 +24,13 @@ export const Header: React.FC = () => {
   const cartItems = useAppSelector((state) => state.cart.items);
   const wishlistItems = useAppSelector((state) => state.wishlist.items);
   const user = useAppSelector((state) => state.auth.user);
+  const bookingLoc = useAppSelector((state) => state.booking);
 
   const totalCartCount = cartItems.reduce((acc, i) => acc + i.quantity, 0);
+  const totalMinutes = cartItems.reduce(
+    (acc, i) => acc + i.product.durationMinutes * i.quantity,
+    0
+  );
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
@@ -137,8 +144,26 @@ export const Header: React.FC = () => {
               </Link>
             </nav>
 
-            {/* Zone 3: Actions (Wishlist, User, Cart) */}
+            {/* Zone 3: Actions (Location, Wishlist, User, Booking) */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              {/* Location Pill */}
+              <Link
+                to="/services"
+                className={`hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                  bookingLoc.isLocationConfirmed
+                    ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100'
+                    : 'bg-amber-50 text-amber-800 border-amber-200 hover:bg-amber-100'
+                }`}
+                title="Confirm or change your city & PIN code"
+              >
+                <MapPin className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate max-w-[130px]">
+                  {bookingLoc.isLocationConfirmed
+                    ? `${bookingLoc.city} · ${bookingLoc.pincode}`
+                    : 'Check PIN'}
+                </span>
+              </Link>
+
               {/* Wishlist */}
               <Link
                 to="/wishlist"
@@ -167,16 +192,17 @@ export const Header: React.FC = () => {
                 )}
               </Link>
 
-              {/* Cart Drawer Trigger */}
+              {/* Booking Drawer Trigger */}
               <button
                 onClick={() => dispatch(openCartDrawer())}
                 className="flex items-center gap-2 bg-[#601A24] text-white px-3.5 py-2 rounded-lg hover:bg-[#4a121a] transition-colors shadow-sm"
-                aria-label="Open cart drawer"
+                aria-label="Open service booking drawer"
               >
-                <ShoppingBag className="w-4 h-4" />
-                <span className="text-xs font-semibold hidden sm:inline">Cart</span>
+                <CalendarCheck className="w-4 h-4" />
+                <span className="text-xs font-semibold hidden sm:inline">Booking</span>
                 <span className="bg-white/20 text-white text-xs px-1.5 py-0.2 rounded font-mono font-semibold">
                   {totalCartCount}
+                  {totalMinutes > 0 ? ` · ${formatDuration(totalMinutes)}` : ''}
                 </span>
               </button>
             </div>

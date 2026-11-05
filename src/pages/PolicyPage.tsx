@@ -70,10 +70,10 @@ export const PolicyPage: React.FC = () => {
             <>
               <div className="pb-4 border-b border-stone-100">
                 <h1 className="text-2xl font-editorial font-bold text-stone-900">Privacy Policy</h1>
-                <p className="text-xs text-stone-500 mt-1">Sitkan Enterprises / Salonline.in · Last Revised: October 2026</p>
+                <p className="text-xs text-stone-500 mt-1">Sitkan Enterprises / Beautiva.in · Last Revised: October 2026</p>
               </div>
               <p>
-                Salonline ("we", "our", or "us"), operated under Sitkan Enterprises / Sitkan Services Private Limited, respects customer privacy and is committed to protecting the personal data shared when booking home parlor appointments.
+                Beautiva ("we", "our", or "us"), operated under Sitkan Enterprises / Sitkan Services Private Limited, respects customer privacy and is committed to protecting the personal data shared when booking home parlor appointments.
               </p>
               <h3 className="font-bold text-stone-900 text-sm">1. Collection of Data</h3>
               <p>
@@ -85,7 +85,7 @@ export const PolicyPage: React.FC = () => {
               </p>
               <h3 className="font-bold text-stone-900 text-sm">3. Payment Information</h3>
               <p>
-                Salonline operates primarily on a "Pay-After-Service" model. We never store credit or debit card numbers on our local databases.
+                Beautiva operates primarily on a "Pay-After-Service" model. We never store credit or debit card numbers on our local databases.
               </p>
             </>
           )}
@@ -94,11 +94,11 @@ export const PolicyPage: React.FC = () => {
             <>
               <div className="pb-4 border-b border-stone-100">
                 <h1 className="text-2xl font-editorial font-bold text-stone-900">Terms of Sale & Booking Policy</h1>
-                <p className="text-xs text-stone-500 mt-1">Sitkan Enterprises / Salonline.in</p>
+                <p className="text-xs text-stone-500 mt-1">Sitkan Enterprises / Beautiva.in</p>
               </div>
               <h3 className="font-bold text-stone-900 text-sm">1. Appointment Scheduling & Slot Allotment</h3>
               <p>
-                All bookings placed through salonline.in represent an advance request for doorstep services. Beauticians are allotted based on regional availability across Lucknow, Patna, Kanpur, Gorakhpur, and Varanasi.
+                All bookings placed through beautiva.in represent an advance request for doorstep services. Beauticians are allotted based on regional availability across Lucknow, Patna, Kanpur, Gorakhpur, and Varanasi.
               </p>
               <h3 className="font-bold text-stone-900 text-sm">2. Sealed Kit Integrity</h3>
               <p>
@@ -115,18 +115,18 @@ export const PolicyPage: React.FC = () => {
             <>
               <div className="pb-4 border-b border-stone-100">
                 <h1 className="text-2xl font-editorial font-bold text-stone-900">Terms of Use</h1>
-                <p className="text-xs text-stone-500 mt-1">Salonline Web & Service Platform</p>
+                <p className="text-xs text-stone-500 mt-1">Beautiva Web & Service Platform</p>
               </div>
               <p>
-                By accessing and using salonline.in, you agree to comply with all applicable laws of the Republic of India and these terms.
+                By accessing and using beautiva.in, you agree to comply with all applicable laws of the Republic of India and these terms.
               </p>
               <h3 className="font-bold text-stone-900 text-sm">1. Code of Conduct & Stylist Safety</h3>
               <p>
-                Salonline maintains an absolute zero-tolerance policy against harassment, misconduct, or unsafe behavior directed toward our women service partners. We reserve the immediate right to cancel appointments and take legal recourse if safety standards are violated.
+                Beautiva maintains an absolute zero-tolerance policy against harassment, misconduct, or unsafe behavior directed toward our women service partners. We reserve the immediate right to cancel appointments and take legal recourse if safety standards are violated.
               </p>
               <h3 className="font-bold text-stone-900 text-sm">2. Intellectual Property</h3>
               <p>
-                Brand names, trade dress, logos, course materials of the Salonline Beauty School, and proprietary package compositions remain the intellectual property of Sitkan Enterprises and respective brand partners.
+                Brand names, trade dress, logos, course materials of the Beautiva Beauty School, and proprietary package compositions remain the intellectual property of Sitkan Enterprises and respective brand partners.
               </p>
             </>
           )}
@@ -138,13 +138,13 @@ export const PolicyPage: React.FC = () => {
                 <p className="text-xs text-stone-500 mt-1">Compliance & Grievance Redressal</p>
               </div>
               <p>
-                In compliance with the Information Technology Act, 2000 and rules made thereunder, Salonline maintains a dedicated grievance and abuse redressal mechanism.
+                In compliance with the Information Technology Act, 2000 and rules made thereunder, Beautiva maintains a dedicated grievance and abuse redressal mechanism.
               </p>
               <h3 className="font-bold text-stone-900 text-sm">Grievance Officer:</h3>
               <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-1">
-                <p><strong>Name:</strong> Grievance Cell, Salonline, Sitkan Enterprises</p>
+                <p><strong>Name:</strong> Grievance Cell, Beautiva, Sitkan Enterprises</p>
                 <p><strong>Address:</strong> P.No 1 , KH. NO. 118, NewGulista Colony Faizabad Road, Chinhat, Lucknow , 226028</p>
-                <p><strong>Email:</strong> info@salonline.in / grievance@salonline.in</p>
+                <p><strong>Email:</strong> info@beautiva.in / grievance@beautiva.in</p>
                 <p><strong>Phone / Call US:</strong> +91 7236851999 / +91 7007017309</p>
               </div>
               <p>

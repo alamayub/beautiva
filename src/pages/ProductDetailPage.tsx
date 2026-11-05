@@ -68,7 +68,7 @@ export const ProductDetailPage: React.FC = () => {
 
   const handleAddToCart = () => {
     dispatch(addToCart({ product, option: selectedOption }));
-    showToast(`Added ${product.title} to your cart`);
+    showToast(`Added ${product.title} to your booking`);
   };
 
   const handleBookNow = () => {
@@ -106,9 +106,9 @@ export const ProductDetailPage: React.FC = () => {
     <div className="bg-[#FAF8F5] min-h-screen py-8 border-b border-stone-200">
       <SEO
         title={`${product.title} - Doorstep Salon Service`}
-        description={`${product.title} at home by certified Salonline beauticians. Price: ₹${currentPrice}. 100% sealed mono-dose kits & hospital-sterilized tools.`}
+        description={`${product.title} at home by certified Beautiva beauticians. Price: ₹${currentPrice}. 100% sealed mono-dose kits & hospital-sterilized tools.`}
         image={product.image}
-        canonical={`https://salonline.in/package/${product.slug || product.id}`}
+        canonical={`https://beautiva.in/package/${product.slug || product.id}`}
         type="product"
         schema={{
           '@type': 'Product',
@@ -125,7 +125,7 @@ export const ProductDetailPage: React.FC = () => {
             price: currentPrice,
             priceCurrency: 'INR',
             availability: 'https://schema.org/InStock',
-            url: `https://salonline.in/package/${product.slug || product.id}`,
+            url: `https://beautiva.in/package/${product.slug || product.id}`,
             priceValidUntil: '2026-12-31',
           },
           aggregateRating: {
@@ -189,7 +189,7 @@ export const ProductDetailPage: React.FC = () => {
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-emerald-700" />
                 <h3 className="text-base font-bold text-stone-900">
-                  Salonline Doorstep Hygiene Protocols
+                  Beautiva Doorstep Hygiene Protocols
                 </h3>
               </div>
               <div className="space-y-2 text-xs sm:text-sm text-stone-600">
@@ -315,7 +315,7 @@ export const ProductDetailPage: React.FC = () => {
               <div className="space-y-2.5 pt-2 border-t border-stone-100">
                 {cartItem ? (
                   <div className="flex items-center justify-between p-2 bg-stone-50 border border-stone-200 rounded-lg">
-                    <span className="text-xs font-medium text-stone-700">Quantity in Cart:</span>
+                    <span className="text-xs font-medium text-stone-700">Sessions Selected:</span>
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() =>
@@ -359,7 +359,7 @@ export const ProductDetailPage: React.FC = () => {
                     onClick={handleAddToCart}
                     className="py-3 px-4 rounded-lg border border-stone-300 text-stone-800 text-xs font-semibold hover:bg-stone-50 transition-colors cursor-pointer"
                   >
-                    Add to Cart
+                    Add Service
                   </button>
                   <button
                     onClick={handleBookNow}
@@ -372,7 +372,7 @@ export const ProductDetailPage: React.FC = () => {
                 <WhatsAppButton
                   variant="inline"
                   label="Book / Inquire via WhatsApp"
-                  message={`Hello Salonline! I am looking to book "${product.title}" (${formatCurrency(currentPrice)}) for home service. Please share available slots.`}
+                  message={`Hello Beautiva! I am looking to book "${product.title}" (${formatCurrency(currentPrice)}) for home service. Please share available slots.`}
                   className="w-full text-center"
                 />
               </div>

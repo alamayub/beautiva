@@ -14,6 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { updateQuantity, removeFromCart, clearCart } from '../store/features/cart/cartSlice';
 import { formatCurrency } from '../lib/currency';
+import { formatDuration } from '../lib/duration';
 
 export const CartPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -40,15 +41,15 @@ export const CartPage: React.FC = () => {
           <div className="w-16 h-16 rounded-full bg-stone-100 text-stone-400 flex items-center justify-center mx-auto mb-4">
             <ShoppingBag className="w-8 h-8" />
           </div>
-          <h1 className="text-xl font-editorial font-bold text-stone-900">Your Cart is Empty</h1>
+          <h1 className="text-xl font-editorial font-bold text-stone-900">No Services Selected</h1>
           <p className="text-xs text-stone-500 mt-2 max-w-xs mx-auto leading-relaxed">
-            You haven’t selected any salon packages yet. Browse our curated treatments from VLCC, Lotus, and O3+.
+            You haven’t selected any salon services yet. Browse our curated treatments from VLCC, Lotus, and O3+.
           </p>
           <Link
             to="/services"
             className="mt-6 inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#601A24] text-white text-xs font-semibold rounded-lg hover:bg-[#4a121a] transition-colors"
           >
-            <span>Explore Salon Packages</span>
+            <span>Explore Salon Services</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -63,16 +64,16 @@ export const CartPage: React.FC = () => {
         <nav className="flex items-center gap-1.5 text-xs text-stone-500 mb-6" aria-label="Breadcrumb">
           <Link to="/" className="hover:text-stone-900 transition-colors">Home</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <span className="font-semibold text-stone-900">Cart & Appointments</span>
+          <span className="font-semibold text-stone-900">Selected Services</span>
         </nav>
 
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl sm:text-3xl font-editorial font-bold text-stone-900">
-              Shopping Cart
+              Selected Services & Duration
             </h1>
             <p className="text-xs text-stone-500 mt-1">
-              Review your selected at-home salon packages and duration.
+              Review your selected at-home salon services and total session time before picking a slot.
             </p>
           </div>
           <button
@@ -80,7 +81,7 @@ export const CartPage: React.FC = () => {
             className="text-xs text-stone-500 hover:text-rose-600 transition-colors font-medium flex items-center gap-1"
           >
             <Trash2 className="w-3.5 h-3.5" />
-            <span>Clear Cart</span>
+            <span>Clear Services</span>
           </button>
         </div>
 
@@ -88,10 +89,10 @@ export const CartPage: React.FC = () => {
           {/* Items Table */}
           <div className="lg:col-span-8 bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden">
             <div className="p-4 sm:p-6 border-b border-stone-100 flex items-center justify-between text-xs text-stone-500">
-              <span>{items.length} Package{items.length > 1 ? 's' : ''} in Cart</span>
+              <span>{items.length} Service{items.length > 1 ? 's' : ''} Selected</span>
               <div className="flex items-center gap-1.5 font-medium text-stone-700">
                 <Clock className="w-3.5 h-3.5 text-[#601A24]" />
-                <span>Est. Total Session: {totalDuration} mins</span>
+                <span>Total Session Time: <strong className="font-mono text-[#601A24]">{formatDuration(totalDuration)}</strong></span>
               </div>
             </div>
 
@@ -239,21 +240,26 @@ export const CartPage: React.FC = () => {
             </div>
 
             <div className="flex items-baseline justify-between pt-1">
-              <span className="text-sm font-bold text-stone-900">Total Payable</span>
+              <div>
+                <span className="text-sm font-bold text-stone-900 block">Total Payable</span>
+                <span className="text-[11px] font-mono text-stone-500">
+                  Total Time: {formatDuration(totalDuration)}
+                </span>
+              </div>
               <span className="text-xl font-bold text-[#601A24] font-mono">
                 {formatCurrency(subtotal)}
               </span>
             </div>
 
             <p className="text-[11px] text-stone-500 leading-normal">
-              No prepayment necessary. You can pay securely with cash, UPI or card upon completion of the service.
+              Pay online, pay a 20% advance, or pay cash/UPI on service completion.
             </p>
 
             <button
               onClick={() => navigate('/checkout')}
               className="w-full py-3.5 px-4 bg-[#601A24] text-white text-xs font-semibold rounded-lg hover:bg-[#4a121a] transition-colors shadow-sm flex items-center justify-center gap-2"
             >
-              <span>Proceed to Booking Slot</span>
+              <span>Pick Date & Time Slot</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 

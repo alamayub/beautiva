@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import {
   ChatMessage,
-  SALONLINE_SYSTEM_PROMPT,
+  BEAUTIVA_SYSTEM_PROMPT,
   QUICK_PROMPTS_WEBSITE,
   QUICK_PROMPTS_DASHBOARD,
   generateSmartLocalResponse,

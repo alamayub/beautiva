@@ -65,7 +65,7 @@ export const AboutUsPage: React.FC = () => {
                 <p><strong>Founded:</strong> 2017</p>
                 <p><strong>Operating Regions:</strong> Lucknow, Patna, Kanpur, Gorakhpur, Varanasi</p>
                 <p><strong>Call US:</strong> +91 7236851999 / +91 7007017309</p>
-                <p><strong>Write Us:</strong> info@salonline.in</p>
+                <p><strong>Write Us:</strong> info@beautiva.in</p>
               </div>
             </div>
 

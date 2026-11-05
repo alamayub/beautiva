@@ -55,7 +55,7 @@ export const AdminCatalog: React.FC = () => {
   const [formDesc, setFormDesc] = useState('');
   const [formSkinType, setFormSkinType] = useState('All Skin Types');
   const [formStepsCount, setFormStepsCount] = useState(6);
-  const [formImage, setFormImage] = useState('/images/salonline_facial_skincare_1792923326387.jpg');
+  const [formImage, setFormImage] = useState('/images/beautiva_facial_skincare_1792923326387.jpg');
   const [inclusionsText, setInclusionsText] = useState('');
   const [safetyText, setSafetyText] = useState('');
 
@@ -74,7 +74,7 @@ export const AdminCatalog: React.FC = () => {
     setFormDesc('');
     setFormSkinType('All Skin Types');
     setFormStepsCount(6);
-    setFormImage('/images/salonline_facial_skincare_1792923326387.jpg');
+    setFormImage('/images/beautiva_facial_skincare_1792923326387.jpg');
     setInclusionsText('Cleansing & Exfoliation\nDeep pore steam & blackhead suction\nHerbal de-tan pack\nAcupressure glow massage');
     setSafetyText('Single-use sealed kit opened before client\nBeautician in sanitized apron & disposable gloves\nSterilized stainless steel equipment');
     setIsFormModalOpen(true);
@@ -398,7 +398,7 @@ export const AdminCatalog: React.FC = () => {
             Service & Package Catalog
           </h1>
           <p className="text-xs text-stone-500 mt-1">
-            Create, edit, price, and maintain Salonline at-home parlor packages with instant storefront reflection.
+            Create, edit, price, and maintain Beautiva at-home parlor packages with instant storefront reflection.
           </p>
         </div>
 
@@ -518,7 +518,7 @@ export const AdminCatalog: React.FC = () => {
                         {b.name}
                       </option>
                     ))}
-                    <option value="Salonline Artistry">Salonline Artistry</option>
+                    <option value="Beautiva Artistry">Beautiva Artistry</option>
                   </select>
                 </div>
 
@@ -643,16 +643,16 @@ export const AdminCatalog: React.FC = () => {
                   onChange={(e) => setFormImage(e.target.value)}
                   className="w-full bg-stone-50 border border-stone-300 rounded-lg p-2 text-xs focus:outline-none"
                 >
-                  <option value="/images/salonline_facial_skincare_1792923326387.jpg">
+                  <option value="/images/beautiva_facial_skincare_1792923326387.jpg">
                     Facials & Skincare (Botanical Jars & Stone)
                   </option>
-                  <option value="/images/salonline_hair_spa_1792923327617.jpg">
+                  <option value="/images/beautiva_hair_spa_1792923327617.jpg">
                     Hair Spa & Blowdry (Hair Styling)
                   </option>
-                  <option value="/images/salonline_bridal_makeup_1792923326741.jpg">
+                  <option value="/images/beautiva_bridal_makeup_1792923326741.jpg">
                     Bridal & Party Makeup (Bridal Artistry)
                   </option>
-                  <option value="/images/salonline_hero_luxury_1792923326581.jpg">
+                  <option value="/images/beautiva_hero_luxury_1792923326581.jpg">
                     Luxury Spa & Grooming (At-Home Parlor Bed)
                   </option>
                 </select>

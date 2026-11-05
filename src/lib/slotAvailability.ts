@@ -8,6 +8,7 @@ export interface TimeSlotConfig {
   startMinute: number;
   endHour: number;
   endMinute: number;
+  windowMinutes: number;
 }
 
 export const STANDARD_TIME_SLOTS: TimeSlotConfig[] = [
@@ -19,6 +20,7 @@ export const STANDARD_TIME_SLOTS: TimeSlotConfig[] = [
     startMinute: 0,
     endHour: 11,
     endMinute: 30,
+    windowMinutes: 150,
   },
   {
     id: 'slot-m2',
@@ -28,6 +30,7 @@ export const STANDARD_TIME_SLOTS: TimeSlotConfig[] = [
     startMinute: 30,
     endHour: 14,
     endMinute: 0,
+    windowMinutes: 150,
   },
   {
     id: 'slot-a1',
@@ -37,6 +40,7 @@ export const STANDARD_TIME_SLOTS: TimeSlotConfig[] = [
     startMinute: 30,
     endHour: 17,
     endMinute: 0,
+    windowMinutes: 150,
   },
   {
     id: 'slot-a2',
@@ -46,6 +50,7 @@ export const STANDARD_TIME_SLOTS: TimeSlotConfig[] = [
     startMinute: 0,
     endHour: 18,
     endMinute: 30,
+    windowMinutes: 150,
   },
   {
     id: 'slot-e1',
@@ -55,6 +60,7 @@ export const STANDARD_TIME_SLOTS: TimeSlotConfig[] = [
     startMinute: 30,
     endHour: 20,
     endMinute: 0,
+    windowMinutes: 150,
   },
   {
     id: 'slot-e2',
@@ -64,8 +70,69 @@ export const STANDARD_TIME_SLOTS: TimeSlotConfig[] = [
     startMinute: 0,
     endHour: 21,
     endMinute: 30,
+    windowMinutes: 150,
   },
 ];
+
+export const EXTENDED_TIME_SLOTS: TimeSlotConfig[] = [
+  {
+    id: 'slot-ext-m',
+    label: '09:00 AM - 01:00 PM',
+    period: 'morning',
+    startHour: 9,
+    startMinute: 0,
+    endHour: 13,
+    endMinute: 0,
+    windowMinutes: 240,
+  },
+  {
+    id: 'slot-ext-a',
+    label: '02:00 PM - 06:00 PM',
+    period: 'afternoon',
+    startHour: 14,
+    startMinute: 0,
+    endHour: 18,
+    endMinute: 0,
+    windowMinutes: 240,
+  },
+  {
+    id: 'slot-ext-e',
+    label: '05:30 PM - 09:30 PM',
+    period: 'evening',
+    startHour: 17,
+    startMinute: 30,
+    endHour: 21,
+    endMinute: 30,
+    windowMinutes: 240,
+  },
+];
+
+export const getSlotsForDuration = (totalDurationMinutes: number = 60): TimeSlotConfig[] => {
+  if (totalDurationMinutes > 150) {
+    return EXTENDED_TIME_SLOTS;
+  }
+  return STANDARD_TIME_SLOTS;
+};
+
+export const formatSessionEndTime = (
+  startHour: number,
+  startMinute: number,
+  durationMinutes: number
+): string => {
+  const totalStartMins = startHour * 60 + startMinute;
+  const totalEndMins = totalStartMins + Math.max(15, durationMinutes);
+  const endH = Math.floor(totalEndMins / 60) % 24;
+  const endM = totalEndMins % 60;
+  const period = endH >= 12 ? 'PM' : 'AM';
+  const displayH = endH % 12 === 0 ? 12 : endH % 12;
+  return `${String(displayH).padStart(2, '0')}:${String(endM).padStart(2, '0')} ${period}`;
+};
+
+export const formatStartTime = (startHour: number, startMinute: number): string => {
+  const period = startHour >= 12 ? 'PM' : 'AM';
+  const displayH = startHour % 12 === 0 ? 12 : startHour % 12;
+  return `${String(displayH).padStart(2, '0')}:${String(startMinute).padStart(2, '0')} ${period}`;
+};
 
 // Capacity per slot per city (number of concurrent cosmetologists available)
 export const CITY_SLOT_CAPACITY: Record<string, number> = {
@@ -79,7 +146,7 @@ export const CITY_SLOT_CAPACITY: Record<string, number> = {
 
 export const getStoredBookings = (): BookingRecord[] => {
   try {
-    const raw = localStorage.getItem('salonline_admin_bookings');
+    const raw = localStorage.getItem('beautiva_admin_bookings');
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
@@ -96,7 +163,7 @@ export const saveBookingRecord = (booking: BookingRecord) => {
   try {
     const current = getStoredBookings();
     const updated = [booking, ...current.filter((b) => b.id !== booking.id)];
-    localStorage.setItem('salonline_admin_bookings', JSON.stringify(updated));
+    localStorage.setItem('beautiva_admin_bookings', JSON.stringify(updated));
   } catch {
     // ignore
   }
@@ -104,6 +171,7 @@ export const saveBookingRecord = (booking: BookingRecord) => {
 
 export interface SlotAvailabilityResult {
   slot: string;
+  sessionWindowLabel: string;
   period: 'morning' | 'afternoon' | 'evening';
   isAvailable: boolean;
   status: 'available' | 'filling_fast' | 'sold_out' | 'passed';
@@ -115,7 +183,8 @@ export interface SlotAvailabilityResult {
 export const checkSlotAvailability = (
   dateStr: string, // YYYY-MM-DD
   timeSlotLabel: string,
-  city: string = 'Lucknow'
+  city: string = 'Lucknow',
+  totalDurationMinutes: number = 60
 ): SlotAvailabilityResult => {
   const allBookings = getStoredBookings();
   const capacity = CITY_SLOT_CAPACITY[city] || 2;
@@ -130,8 +199,16 @@ export const checkSlotAvailability = (
   );
 
   const bookedCount = matchingBookings.length;
-  const slotCfg = STANDARD_TIME_SLOTS.find((s) => s.label === timeSlotLabel);
+  const allSlots = [...STANDARD_TIME_SLOTS, ...EXTENDED_TIME_SLOTS];
+  const slotCfg = allSlots.find((s) => s.label === timeSlotLabel);
   const period = slotCfg?.period || 'morning';
+  const sessionWindowLabel = slotCfg
+    ? `${formatStartTime(slotCfg.startHour, slotCfg.startMinute)} – ${formatSessionEndTime(
+        slotCfg.startHour,
+        slotCfg.startMinute,
+        totalDurationMinutes
+      )}`
+    : timeSlotLabel;
 
   // Check if date and time have already passed
   const now = new Date();
@@ -142,6 +219,7 @@ export const checkSlotAvailability = (
   if (targetDate < todayDate) {
     return {
       slot: timeSlotLabel,
+      sessionWindowLabel,
       period,
       isAvailable: false,
       status: 'passed',
@@ -161,6 +239,7 @@ export const checkSlotAvailability = (
     ) {
       return {
         slot: timeSlotLabel,
+        sessionWindowLabel,
         period,
         isAvailable: false,
         status: 'passed',
@@ -176,6 +255,7 @@ export const checkSlotAvailability = (
   if (remaining === 0) {
     return {
       slot: timeSlotLabel,
+      sessionWindowLabel,
       period,
       isAvailable: false,
       status: 'sold_out',
@@ -188,23 +268,25 @@ export const checkSlotAvailability = (
   if (remaining === 1) {
     return {
       slot: timeSlotLabel,
+      sessionWindowLabel,
       period,
       isAvailable: true,
       status: 'filling_fast',
       availableSpots: 1,
       totalCapacity: capacity,
-      badgeLabel: '1 Spot Left (Filling Fast)',
+      badgeLabel: '1 Beautician Free',
     };
   }
 
   return {
     slot: timeSlotLabel,
+    sessionWindowLabel,
     period,
     isAvailable: true,
     status: 'available',
     availableSpots: remaining,
     totalCapacity: capacity,
-    badgeLabel: `${remaining} Slots Available`,
+    badgeLabel: `${remaining} Beauticians Free`,
   };
 };
 
@@ -219,7 +301,8 @@ export interface DayAvailabilitySummary {
 
 export const getDayAvailability = (
   dateStr: string,
-  city: string = 'Lucknow'
+  city: string = 'Lucknow',
+  totalDurationMinutes: number = 60
 ): DayAvailabilitySummary => {
   const now = new Date();
   const [y, m, d] = dateStr.split('-').map(Number);
@@ -228,6 +311,7 @@ export const getDayAvailability = (
 
   const isPast = targetDate < todayDate;
   const isToday = targetDate.getTime() === todayDate.getTime();
+  const slotsForDuration = getSlotsForDuration(totalDurationMinutes);
 
   if (isPast) {
     return {
@@ -235,18 +319,18 @@ export const getDayAvailability = (
       isPast: true,
       isToday: false,
       availableCount: 0,
-      totalCount: STANDARD_TIME_SLOTS.length,
+      totalCount: slotsForDuration.length,
       status: 'past',
     };
   }
 
   let availableCount = 0;
-  STANDARD_TIME_SLOTS.forEach((slot) => {
-    const res = checkSlotAvailability(dateStr, slot.label, city);
+  slotsForDuration.forEach((slot) => {
+    const res = checkSlotAvailability(dateStr, slot.label, city, totalDurationMinutes);
     if (res.isAvailable) availableCount++;
   });
 
-  const total = STANDARD_TIME_SLOTS.length;
+  const total = slotsForDuration.length;
   let status: DayAvailabilitySummary['status'] = 'high';
   if (availableCount === 0) status = 'sold_out';
   else if (availableCount <= 2) status = 'low';

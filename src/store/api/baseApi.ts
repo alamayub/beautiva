@@ -7,8 +7,8 @@ import { Category } from '../../types/category';
 import { Brand } from '../../types/brand';
 import { Order } from '../../types/order';
 
-export const salonlineApi = createApi({
-  reducerPath: 'salonlineApi',
+export const beautivaApi = createApi({
+  reducerPath: 'beautivaApi',
   baseQuery: fakeBaseQuery(),
   tagTypes: ['Product', 'Category', 'Brand', 'Order'],
   endpoints: (builder) => ({
@@ -85,7 +85,7 @@ export const salonlineApi = createApi({
     createOrder: builder.mutation<Order, Partial<Order>>({
       queryFn: async (orderData) => {
         const newOrder: Order = {
-          id: `SL-${Math.floor(100000 + Math.random() * 900000)}`,
+          id: `BV-${Math.floor(100000 + Math.random() * 900000)}`,
           date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }),
           items: orderData.items || [],
           address: orderData.address!,
@@ -93,6 +93,8 @@ export const salonlineApi = createApi({
           discount: orderData.discount || 0,
           tax: orderData.tax || 0,
           total: orderData.total || 0,
+          paymentMethod: orderData.paymentMethod || 'cash',
+          advanceAmount: orderData.advanceAmount,
           status: 'confirmed',
           assignedBeautician: {
             name: 'Pooja Rawat (Certified Senior Stylist)',
@@ -102,10 +104,10 @@ export const salonlineApi = createApi({
         };
         // Persist order in local storage
         try {
-          const stored = localStorage.getItem('salonline_orders');
+          const stored = localStorage.getItem('beautiva_orders');
           const orders = stored ? JSON.parse(stored) : [];
           orders.unshift(newOrder);
-          localStorage.setItem('salonline_orders', JSON.stringify(orders));
+          localStorage.setItem('beautiva_orders', JSON.stringify(orders));
         } catch {
           // ignore
         }
@@ -135,7 +137,7 @@ export const salonlineApi = createApi({
           durationMinutes: productData.durationMinutes || 60,
           description: productData.description || 'Professional at-home salon treatment.',
           shortDescription: productData.shortDescription || 'Signature at-home beauty treatment.',
-          image: productData.image || '/images/salonline_facial_skincare_1792923326387.jpg',
+          image: productData.image || '/images/beautiva_facial_skincare_1792923326387.jpg',
           inclusions: productData.inclusions || ['Cleansing & Exfoliation', 'Herbal Face Pack', 'Acupressure Massage'],
           badge: productData.badge,
           isPackage: productData.isPackage !== false,
@@ -194,4 +196,4 @@ export const {
   useCreateProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
-} = salonlineApi;
+} = beautivaApi;

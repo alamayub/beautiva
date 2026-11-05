@@ -1,7 +1,7 @@
 import React from 'react';
 import { ShieldCheck, UserCheck, PackageCheck, Sparkles, MapPin, Award } from 'lucide-react';
 
-export const WhySalonline: React.FC = () => {
+export const WhyBeautiva: React.FC = () => {
   const trustPoints = [
     {
       icon: PackageCheck,

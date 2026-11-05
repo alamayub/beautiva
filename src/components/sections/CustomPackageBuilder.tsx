@@ -39,7 +39,7 @@ const BUILDER_ITEMS: BuilderOption[] = [
     price: 899,
     originalPrice: 1400,
     durationMinutes: 60,
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     highlight: 'Deep cleansing + herbal de-tan'
   },
   {
@@ -50,7 +50,7 @@ const BUILDER_ITEMS: BuilderOption[] = [
     price: 999,
     originalPrice: 1650,
     durationMinutes: 70,
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     highlight: '24K gold leaves + acupressure glow'
   },
   {
@@ -61,7 +61,7 @@ const BUILDER_ITEMS: BuilderOption[] = [
     price: 1399,
     originalPrice: 2200,
     durationMinutes: 75,
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     highlight: 'Dermatologically tested bridal glow'
   },
 
@@ -74,7 +74,7 @@ const BUILDER_ITEMS: BuilderOption[] = [
     price: 699,
     originalPrice: 1100,
     durationMinutes: 45,
-    image: '/images/salonline_hero_luxury_1792923326581.jpg',
+    image: '/images/beautiva_hero_luxury_1792923326581.jpg',
     highlight: 'Colophony-free & painless strip'
   },
   {
@@ -85,7 +85,7 @@ const BUILDER_ITEMS: BuilderOption[] = [
     price: 399,
     originalPrice: 650,
     durationMinutes: 30,
-    image: '/images/salonline_hero_luxury_1792923326581.jpg',
+    image: '/images/beautiva_hero_luxury_1792923326581.jpg',
     highlight: 'Gentle on sensitive skin'
   },
 
@@ -98,7 +98,7 @@ const BUILDER_ITEMS: BuilderOption[] = [
     price: 799,
     originalPrice: 1300,
     durationMinutes: 50,
-    image: '/images/salonline_hair_spa_1792923327617.jpg',
+    image: '/images/beautiva_hair_spa_1792923327617.jpg',
     highlight: 'Steam cap + scalp reflexology'
   },
   {
@@ -109,7 +109,7 @@ const BUILDER_ITEMS: BuilderOption[] = [
     price: 649,
     originalPrice: 1050,
     durationMinutes: 55,
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     highlight: 'Disposable foot tub liner included'
   }
 ];
@@ -130,7 +130,7 @@ export const CustomPackageBuilder: React.FC = () => {
   const baseOriginalPrice = selectedItems.reduce((acc, item) => acc + item.originalPrice, 0);
   const totalMinutes = selectedItems.reduce((acc, item) => acc + item.durationMinutes, 0);
 
-  // Multi-item combo discounts (Salonline dynamic bundle rewards)
+  // Multi-item combo discounts (Beautiva dynamic bundle rewards)
   let bundleDiscountPercent = 0;
   if (itemCount === 2) bundleDiscountPercent = 10;
   if (itemCount >= 3) bundleDiscountPercent = 20;

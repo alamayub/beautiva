@@ -17,7 +17,7 @@ export const NotFoundPage: React.FC = () => {
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#601A24] text-white text-xs font-semibold rounded-lg hover:bg-[#4a121a] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Salonline Home</span>
+            <span>Return to Beautiva Home</span>
           </Link>
         </div>
       </div>

@@ -64,7 +64,7 @@ export const HeroSection: React.FC = () => {
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-stone-200/90 aspect-[4/3] lg:aspect-[4/3] bg-stone-100">
               <img
-                src="/images/salonline_hero_luxury_1792923326581.jpg"
+                src="/images/beautiva_hero_luxury_1792923326581.jpg"
                 alt="Beautiva luxury at-home parlor therapy"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"

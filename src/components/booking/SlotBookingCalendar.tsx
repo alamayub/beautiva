@@ -14,17 +14,21 @@ import {
   Zap
 } from 'lucide-react';
 import { 
-  STANDARD_TIME_SLOTS, 
+  getSlotsForDuration,
   checkSlotAvailability, 
   getDayAvailability, 
   formatDateToReadable,
   SlotAvailabilityResult 
 } from '../../lib/slotAvailability';
+import { formatDuration } from '../../lib/duration';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { holdSlot } from '../../store/features/booking/bookingSlice';
 
 interface SlotBookingCalendarProps {
   selectedDate: string; // YYYY-MM-DD
   selectedSlot: string; // e.g. "09:00 AM - 11:30 AM"
   city?: string;
+  totalDurationMinutes?: number;
   onSelectDate: (date: string) => void;
   onSelectSlot: (slot: string) => void;
   className?: string;
@@ -34,10 +38,35 @@ export const SlotBookingCalendar: React.FC<SlotBookingCalendarProps> = ({
   selectedDate,
   selectedSlot,
   city = 'Lucknow',
+  totalDurationMinutes = 60,
   onSelectDate,
   onSelectSlot,
   className = '',
 }) => {
+  const dispatch = useAppDispatch();
+  const slotHold = useAppSelector((state) => state.booking.slotHold);
+  const [holdSecondsLeft, setHoldSecondsLeft] = useState<number>(0);
+
+  useEffect(() => {
+    if (!slotHold) {
+      setHoldSecondsLeft(0);
+      return;
+    }
+    const updateTimer = () => {
+      const diff = Math.max(0, Math.floor((slotHold.expiresAt - Date.now()) / 1000));
+      setHoldSecondsLeft(diff);
+    };
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    return () => clearInterval(interval);
+  }, [slotHold]);
+
+  const handleSelectTimeSlot = (slot: string) => {
+    onSelectSlot(slot);
+    if (selectedDate) {
+      dispatch(holdSlot({ date: selectedDate, timeSlot: slot, city }));
+    }
+  };
   // Calendar month state
   const initialDate = selectedDate ? new Date(selectedDate) : new Date();
   const [currentYear, setCurrentYear] = useState(initialDate.getFullYear());
@@ -112,26 +141,29 @@ export const SlotBookingCalendar: React.FC<SlotBookingCalendarProps> = ({
     const map: Record<string, ReturnType<typeof getDayAvailability>> = {};
     for (let day = 1; day <= daysInMonth; day++) {
       const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-      map[dateStr] = getDayAvailability(dateStr, city);
+      map[dateStr] = getDayAvailability(dateStr, city, totalDurationMinutes);
     }
     return map;
-  }, [currentYear, currentMonth, daysInMonth, city]);
+  }, [currentYear, currentMonth, daysInMonth, city, totalDurationMinutes]);
 
-  // Compute availability for all time slots on the selected date
-  const slotResults = useMemo<SlotAvailabilityResult[]>(() => {
+  // Compute availability for all time slots on the selected date, and show ONLY slots where a beautician is free
+  const freeSlotResults = useMemo<SlotAvailabilityResult[]>(() => {
     if (!selectedDate) return [];
-    return STANDARD_TIME_SLOTS.map((slot) =>
-      checkSlotAvailability(selectedDate, slot.label, city)
-    );
-  }, [selectedDate, city]);
+    const slots = getSlotsForDuration(totalDurationMinutes);
+    return slots
+      .map((slot) =>
+        checkSlotAvailability(selectedDate, slot.label, city, totalDurationMinutes)
+      )
+      .filter((res) => res.isAvailable);
+  }, [selectedDate, city, totalDurationMinutes]);
 
-  // Group slots by period (Morning, Afternoon, Evening)
+  // Group free slots by period (Morning, Afternoon, Evening)
   const groupedSlots = useMemo(() => {
-    const morning = slotResults.filter((s) => s.period === 'morning');
-    const afternoon = slotResults.filter((s) => s.period === 'afternoon');
-    const evening = slotResults.filter((s) => s.period === 'evening');
+    const morning = freeSlotResults.filter((s) => s.period === 'morning');
+    const afternoon = freeSlotResults.filter((s) => s.period === 'afternoon');
+    const evening = freeSlotResults.filter((s) => s.period === 'evening');
     return { morning, afternoon, evening };
-  }, [slotResults]);
+  }, [freeSlotResults]);
 
   // Selected date availability summary
   const selectedDaySummary = selectedDate ? monthDaysAvailability[selectedDate] : null;
@@ -143,13 +175,13 @@ export const SlotBookingCalendar: React.FC<SlotBookingCalendarProps> = ({
       const dt = new Date(startDt);
       dt.setDate(dt.getDate() + i);
       const str = `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
-      const avail = getDayAvailability(str, city);
+      const avail = getDayAvailability(str, city, totalDurationMinutes);
       if (avail.availableCount > 0) {
         return str;
       }
     }
     return null;
-  }, [city]);
+  }, [city, totalDurationMinutes]);
 
   return (
     <div className={`bg-white rounded-2xl border border-stone-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] overflow-hidden ${className}`}>
@@ -314,29 +346,31 @@ export const SlotBookingCalendar: React.FC<SlotBookingCalendarProps> = ({
         </div>
       </div>
 
-      {/* Time Slot Availability Section for Selected Date */}
+      {/* Time Slot Availability Section for Selected Date (Only Free Beautician Slots) */}
       <div className="p-4 sm:p-5 bg-gradient-to-b from-[#FAF8F5]/80 to-white border-t border-stone-200/80 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#601A24] flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5" />
-              <span>Available Slots for {formatDateToReadable(selectedDate)}</span>
+              <span>
+                Free Beautician Slots for {formatDateToReadable(selectedDate)} ({formatDuration(totalDurationMinutes)} session)
+              </span>
             </span>
             <p className="text-xs text-stone-500 mt-0.5">
-              {selectedDaySummary?.availableCount ? (
+              {freeSlotResults.length > 0 ? (
                 <span>
-                  <strong>{selectedDaySummary.availableCount}</strong> of {selectedDaySummary.totalCount} slots currently open in {city}.
+                  Showing <strong>{freeSlotResults.length}</strong> time slot{freeSlotResults.length > 1 ? 's' : ''} where a beautician is free in {city} for your {formatDuration(totalDurationMinutes)} session.
                 </span>
               ) : (
                 <span className="text-rose-600 font-semibold">
-                  All slots are currently booked for this date in {city}.
+                  No beauticians are free on this date in {city}. Please pick another date.
                 </span>
               )}
             </p>
           </div>
 
           {/* Jump to next available slot if date is full */}
-          {selectedDaySummary?.availableCount === 0 && nextAvailableDate && (
+          {freeSlotResults.length === 0 && nextAvailableDate && (
             <button
               type="button"
               onClick={() => onSelectDate(nextAvailableDate)}
@@ -348,89 +382,96 @@ export const SlotBookingCalendar: React.FC<SlotBookingCalendarProps> = ({
           )}
         </div>
 
-        {/* Slot Grid by Session Periods */}
+        {/* Slot Grid by Session Periods (Only showing periods with free slots) */}
         <div className="space-y-3">
-          
-          {/* Morning Slots */}
-          <div>
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-stone-700 mb-1.5">
-              <Sun className="w-3.5 h-3.5 text-amber-500" />
-              <span>Morning Sessions</span>
+          {groupedSlots.morning.length > 0 && (
+            <div>
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-stone-700 mb-1.5">
+                <Sun className="w-3.5 h-3.5 text-amber-500" />
+                <span>Morning Sessions</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {groupedSlots.morning.map((slotRes) => (
+                  <SlotCard
+                    key={slotRes.slot}
+                    slotRes={slotRes}
+                    isSelected={selectedSlot === slotRes.slot}
+                    onSelectSlot={handleSelectTimeSlot}
+                  />
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {groupedSlots.morning.map((slotRes) => (
-                <SlotCard
-                  key={slotRes.slot}
-                  slotRes={slotRes}
-                  isSelected={selectedSlot === slotRes.slot}
-                  onSelectSlot={onSelectSlot}
-                />
-              ))}
-            </div>
-          </div>
+          )}
 
-          {/* Afternoon Slots */}
-          <div>
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-stone-700 mb-1.5">
-              <Sunset className="w-3.5 h-3.5 text-orange-500" />
-              <span>Afternoon Sessions</span>
+          {groupedSlots.afternoon.length > 0 && (
+            <div>
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-stone-700 mb-1.5">
+                <Sunset className="w-3.5 h-3.5 text-orange-500" />
+                <span>Afternoon Sessions</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {groupedSlots.afternoon.map((slotRes) => (
+                  <SlotCard
+                    key={slotRes.slot}
+                    slotRes={slotRes}
+                    isSelected={selectedSlot === slotRes.slot}
+                    onSelectSlot={handleSelectTimeSlot}
+                  />
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {groupedSlots.afternoon.map((slotRes) => (
-                <SlotCard
-                  key={slotRes.slot}
-                  slotRes={slotRes}
-                  isSelected={selectedSlot === slotRes.slot}
-                  onSelectSlot={onSelectSlot}
-                />
-              ))}
-            </div>
-          </div>
+          )}
 
-          {/* Evening Slots */}
-          <div>
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-stone-700 mb-1.5">
-              <Moon className="w-3.5 h-3.5 text-indigo-500" />
-              <span>Evening Sessions</span>
+          {groupedSlots.evening.length > 0 && (
+            <div>
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-stone-700 mb-1.5">
+                <Moon className="w-3.5 h-3.5 text-indigo-500" />
+                <span>Evening Sessions</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {groupedSlots.evening.map((slotRes) => (
+                  <SlotCard
+                    key={slotRes.slot}
+                    slotRes={slotRes}
+                    isSelected={selectedSlot === slotRes.slot}
+                    onSelectSlot={handleSelectTimeSlot}
+                  />
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {groupedSlots.evening.map((slotRes) => (
-                <SlotCard
-                  key={slotRes.slot}
-                  slotRes={slotRes}
-                  isSelected={selectedSlot === slotRes.slot}
-                  onSelectSlot={onSelectSlot}
-                />
-              ))}
-            </div>
-          </div>
-
+          )}
         </div>
 
-        {/* Active Selection Summary Confirmation */}
+        {/* Active Selection + 10-Minute Slot Hold Timer */}
         {selectedSlot && (
-          <div className="mt-3 p-3 bg-white rounded-xl border border-stone-200 shadow-2xs flex items-center justify-between gap-3 text-xs">
-            <div className="flex items-center gap-2">
+          <div className="mt-3 p-3.5 bg-emerald-50/70 rounded-xl border border-emerald-200 shadow-2xs flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <div>
                 <span className="font-semibold text-stone-900">
-                  Confirmed Slot: {selectedSlot}
+                  Slot Held: {selectedSlot}
                 </span>
-                <span className="text-stone-500 block text-[11px]">
-                  {formatDateToReadable(selectedDate)} · Doorstep arrival with sealed kit
+                <span className="text-stone-600 block text-[11px]">
+                  {formatDateToReadable(selectedDate)} · {formatDuration(totalDurationMinutes)} session · Beautician reserved
                 </span>
               </div>
             </div>
 
-            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              Verified Open
-            </span>
+            {holdSecondsLeft > 0 ? (
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#601A24] bg-white px-2.5 py-1 rounded-md border border-[#601A24]/20">
+                <Clock className="w-3.5 h-3.5 text-[#601A24]" />
+                Held for {String(Math.floor(holdSecondsLeft / 60)).padStart(2, '0')}:
+                {String(holdSecondsLeft % 60).padStart(2, '0')}
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-800 bg-white px-2.5 py-1 rounded-md border border-emerald-200">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                Beautician Free
+              </span>
+            )}
           </div>
         )}
-
       </div>
-
     </div>
   );
 };
@@ -442,34 +483,32 @@ interface SlotCardProps {
 }
 
 const SlotCard: React.FC<SlotCardProps> = ({ slotRes, isSelected, onSelectSlot }) => {
-  const { slot, isAvailable, status, badgeLabel } = slotRes;
+  const { slot, sessionWindowLabel, status, badgeLabel } = slotRes;
 
   return (
     <button
       type="button"
-      disabled={!isAvailable}
-      onClick={() => isAvailable && onSelectSlot(slot)}
+      onClick={() => onSelectSlot(slot)}
       className={`p-3 rounded-xl border text-left transition-all flex items-center justify-between gap-2 ${
-        !isAvailable
-          ? 'bg-stone-50 border-stone-200/60 opacity-60 cursor-not-allowed text-stone-400'
-          : isSelected
+        isSelected
           ? 'bg-[#601A24] border-[#601A24] text-white shadow-sm ring-2 ring-[#601A24]/20 cursor-pointer'
           : 'bg-white hover:bg-stone-50 border-stone-200 text-stone-800 hover:border-stone-300 cursor-pointer shadow-2xs'
       }`}
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 min-w-0">
         <Clock className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-white' : 'text-stone-400'}`} />
-        <span className={`text-xs font-semibold font-mono ${isSelected ? 'text-white' : 'text-stone-900'}`}>
-          {slot}
-        </span>
+        <div className="min-w-0">
+          <span className={`text-xs font-semibold font-mono block truncate ${isSelected ? 'text-white' : 'text-stone-900'}`}>
+            {sessionWindowLabel}
+          </span>
+          <span className={`text-[10px] font-mono block ${isSelected ? 'text-white/80' : 'text-stone-400'}`}>
+            Window: {slot}
+          </span>
+        </div>
       </div>
 
-      <div>
-        {!isAvailable ? (
-          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 font-mono">
-            {badgeLabel}
-          </span>
-        ) : status === 'filling_fast' ? (
+      <div className="shrink-0">
+        {status === 'filling_fast' ? (
           <span
             className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-mono ${
               isSelected

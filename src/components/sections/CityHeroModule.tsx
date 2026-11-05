@@ -14,6 +14,13 @@ import {
 } from 'lucide-react';
 import { categories } from '../../data/categories';
 import { formatCurrency } from '../../lib/currency';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import {
+  confirmLocation,
+  checkPincodeServiceability,
+  SERVICEABLE_CITIES,
+} from '../../store/features/booking/bookingSlice';
+import { useToast } from '../common/ToastProvider';
 
 const CITY_DETAILS: Record<string, {
   name: string;
@@ -84,15 +91,54 @@ const CATEGORY_ICONS: Record<string, { emoji: string; color: string }> = {
 
 export const CityHeroModule: React.FC = () => {
   const navigate = useNavigate();
-  const [selectedCity, setSelectedCity] = useState<string>('Lucknow');
-  const [selectedLocality, setSelectedLocality] = useState<string>('Gomti Nagar');
+  const dispatch = useAppDispatch();
+  const { showToast } = useToast();
+  const bookingLoc = useAppSelector((state) => state.booking);
+
+  const [selectedCity, setSelectedCity] = useState<string>(bookingLoc.city || 'Lucknow');
+  const [selectedLocality, setSelectedLocality] = useState<string>(
+    bookingLoc.locality || 'Gomti Nagar'
+  );
+  const [pincodeInput, setPincodeInput] = useState<string>(
+    bookingLoc.pincode || SERVICEABLE_CITIES[bookingLoc.city || 'Lucknow']?.samplePincodes[0] || '226010'
+  );
+  const [pincodeError, setPincodeError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   const currentCity = CITY_DETAILS[selectedCity] || CITY_DETAILS['Lucknow'];
 
   const handleCityChange = (city: string) => {
     setSelectedCity(city);
-    setSelectedLocality(CITY_DETAILS[city]?.localities[0] || 'Center');
+    const loc = CITY_DETAILS[city]?.localities[0] || 'Center';
+    setSelectedLocality(loc);
+    const samplePin = SERVICEABLE_CITIES[city]?.samplePincodes[0] || '';
+    setPincodeInput(samplePin);
+    setPincodeError(null);
+  };
+
+  const handleConfirmPincode = (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = checkPincodeServiceability(pincodeInput, selectedCity);
+    if (!res.serviceable || !res.matchedCity) {
+      setPincodeError(res.message);
+      return;
+    }
+    setPincodeError(null);
+    const matched = res.matchedCity;
+    const loc =
+      matched === selectedCity
+        ? selectedLocality
+        : CITY_DETAILS[matched]?.localities[0] || '';
+    setSelectedCity(matched);
+    setSelectedLocality(loc);
+    dispatch(
+      confirmLocation({
+        city: matched,
+        pincode: pincodeInput.trim(),
+        locality: loc,
+      })
+    );
+    showToast(`Service confirmed at ${loc}, ${matched} (${pincodeInput.trim()})`);
   };
 
   const handleSearch = (e: React.FormEvent) => {
@@ -106,51 +152,86 @@ export const CityHeroModule: React.FC = () => {
     <section className="relative overflow-hidden bg-gradient-to-b from-[#FAF8F5] via-[#FFFDF9] to-white border-b border-stone-200 pt-6 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* City & Locality Selector Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 bg-white p-2.5 sm:p-3 rounded-2xl border border-stone-200/90 shadow-[0_2px_10px_rgba(0,0,0,0.03)]">
-          <div className="flex items-center gap-2 flex-wrap">
-            <div className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-xl border border-stone-200 text-xs text-stone-700">
-              <MapPin className="w-4 h-4 text-[#601A24] shrink-0" />
-              <span className="text-[11px] font-medium text-stone-500 uppercase tracking-wider">City:</span>
-              <select
-                value={selectedCity}
-                onChange={(e) => handleCityChange(e.target.value)}
-                className="font-bold text-stone-900 bg-transparent focus:outline-none cursor-pointer pr-1"
-                aria-label="Select City"
-              >
-                {Object.keys(CITY_DETAILS).map((c) => (
-                  <option key={c} value={c}>{c}</option>
-                ))}
-              </select>
+        {/* Step 1: City, Locality & Pincode Check Bar */}
+        <form
+          onSubmit={handleConfirmPincode}
+          className="mb-6 bg-white p-3 sm:p-3.5 rounded-2xl border border-stone-200/90 shadow-[0_2px_10px_rgba(0,0,0,0.03)] space-y-2"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-xl border border-stone-200 text-xs text-stone-700">
+                <MapPin className="w-4 h-4 text-[#601A24] shrink-0" />
+                <span className="text-[11px] font-medium text-stone-500 uppercase tracking-wider">City:</span>
+                <select
+                  value={selectedCity}
+                  onChange={(e) => handleCityChange(e.target.value)}
+                  className="font-bold text-stone-900 bg-transparent focus:outline-none cursor-pointer pr-1"
+                  aria-label="Select City"
+                >
+                  {Object.keys(CITY_DETAILS).map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-xl border border-stone-200 text-xs text-stone-700">
+                <span className="text-[11px] font-medium text-stone-500 uppercase tracking-wider">Area:</span>
+                <select
+                  value={selectedLocality}
+                  onChange={(e) => setSelectedLocality(e.target.value)}
+                  className="font-semibold text-stone-900 bg-transparent focus:outline-none cursor-pointer"
+                  aria-label="Select Locality"
+                >
+                  {currentCity.localities.map((loc) => (
+                    <option key={loc} value={loc}>{loc}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex items-center gap-1.5 bg-[#FAF8F5] pl-3 pr-1.5 py-1 rounded-xl border border-stone-200 text-xs">
+                <span className="text-[11px] font-medium text-stone-500 uppercase tracking-wider">PIN:</span>
+                <input
+                  type="text"
+                  maxLength={6}
+                  value={pincodeInput}
+                  onChange={(e) => {
+                    setPincodeInput(e.target.value.replace(/\D/g, ''));
+                    setPincodeError(null);
+                  }}
+                  placeholder="226010"
+                  aria-label="Enter 6-digit PIN code"
+                  className="w-18 font-mono font-bold text-stone-900 bg-transparent focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  className="px-2.5 py-1 rounded-lg bg-[#601A24] hover:bg-[#4a121a] text-white text-[11px] font-semibold transition-colors"
+                >
+                  {bookingLoc.isLocationConfirmed &&
+                  bookingLoc.pincode === pincodeInput &&
+                  bookingLoc.city === selectedCity
+                    ? 'Confirmed ✓'
+                    : 'Check & Confirm'}
+                </button>
+              </div>
             </div>
 
-            <div className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-xl border border-stone-200 text-xs text-stone-700">
-              <span className="text-[11px] font-medium text-stone-500 uppercase tracking-wider">Area:</span>
-              <select
-                value={selectedLocality}
-                onChange={(e) => setSelectedLocality(e.target.value)}
-                className="font-semibold text-stone-900 bg-transparent focus:outline-none cursor-pointer"
-                aria-label="Select Locality"
-              >
-                {currentCity.localities.map((loc) => (
-                  <option key={loc} value={loc}>{loc}</option>
-                ))}
-              </select>
+            {/* Real-time Status Badge */}
+            <div className="flex items-center gap-3 text-xs text-stone-600">
+              <span className="inline-flex items-center gap-1.5 font-medium text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/70">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>{currentCity.stylistsCount} Stylists Available</span>
+              </span>
+              <span className="hidden md:inline text-stone-400">·</span>
+              <span className="hidden md:inline font-mono text-stone-700">
+                Earliest Slot: <strong className="text-stone-900">{currentCity.nextSlot}</strong>
+              </span>
             </div>
           </div>
 
-          {/* Real-time Status Badge */}
-          <div className="flex items-center gap-3 text-xs text-stone-600">
-            <span className="inline-flex items-center gap-1.5 font-medium text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/70">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>{currentCity.stylistsCount} Stylists Available</span>
-            </span>
-            <span className="hidden md:inline text-stone-400">·</span>
-            <span className="hidden md:inline font-mono text-stone-700">
-              Earliest Slot: <strong className="text-stone-900">{currentCity.nextSlot}</strong>
-            </span>
-          </div>
-        </div>
+          {pincodeError && (
+            <p className="text-[11px] text-rose-600 font-medium px-1">{pincodeError}</p>
+          )}
+        </form>
 
         {/* Hero Banner Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-10">
@@ -232,7 +313,7 @@ export const CityHeroModule: React.FC = () => {
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-stone-200 aspect-[4/3] bg-stone-100">
               <img
-                src="/images/salonline_hero_luxury_1792923326581.jpg"
+                src="/images/beautiva_hero_luxury_1792923326581.jpg"
                 alt="Beautiva luxury at-home parlor therapy"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"

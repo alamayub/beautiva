@@ -7,7 +7,7 @@ interface WishlistState {
 
 const loadWishlist = (): Product[] => {
   try {
-    const raw = localStorage.getItem('salonline_wishlist');
+    const raw = localStorage.getItem('beautiva_wishlist');
     if (raw) return JSON.parse(raw);
   } catch {
     // fallback
@@ -17,7 +17,7 @@ const loadWishlist = (): Product[] => {
 
 const saveWishlist = (items: Product[]) => {
   try {
-    localStorage.setItem('salonline_wishlist', JSON.stringify(items));
+    localStorage.setItem('beautiva_wishlist', JSON.stringify(items));
   } catch {
     // ignore
   }

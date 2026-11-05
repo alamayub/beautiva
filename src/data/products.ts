@@ -14,7 +14,7 @@ export const products: Product[] = [
     durationMinutes: 75,
     description: 'A signature rejuvenating package featuring the authentic VLCC Insta Glow treatment paired with complimentary face and neck de-tan bleach. Deeply cleanses impurities, exfoliates dead epidermal cells, and restores instantaneous radiance.',
     shortDescription: 'VLCC Insta Glow Facial + Face & Neck Bleach + Eyebrow Shaping.',
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     inclusions: [
       'VLCC Insta Glow Cleanser & Exfoliation',
       'Gentle Steam & Blackhead Removal',
@@ -46,7 +46,7 @@ export const products: Product[] = [
     durationMinutes: 90,
     description: 'Formulated with grape, mulberry, and saxifraga extracts, this 90-minute intensive whitening and glow facial brightens dull skin while reducing sun tan and hyper-pigmentation. Includes face and neck bleach plus threading.',
     shortDescription: 'Lotus WhiteGlow Skin Whitening Facial + Face & Neck Bleach + Threading.',
-    image: '/images/salonline_hero_luxury_1792923326581.jpg',
+    image: '/images/beautiva_hero_luxury_1792923326581.jpg',
     inclusions: [
       'Lotus WhiteGlow Cleansing Milk & Gel Scrub',
       'Gentle steam with ultrasonic blackhead extraction',
@@ -79,7 +79,7 @@ export const products: Product[] = [
     durationMinutes: 80,
     description: 'Designed for instant pre-event radiance. Combines a light-reflecting Party Glow facial with deep pore detox, herbal face bleach, and eyebrow threading to ensure flawless makeup canvas.',
     shortDescription: 'Party Glow Facial + Face Bleach + Eyebrow & Upper Lip Threading.',
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     inclusions: [
       'Hydrating fruit cleanse & micro-granule polish',
       'Pore unclogging steam & suction',
@@ -110,7 +110,7 @@ export const products: Product[] = [
     durationMinutes: 150,
     description: 'The ultimate monthly full-body grooming retreat at home. Encompasses full arms and full legs waxing with Rica gentle wax, underarm waxing, VLCC glowing facial, and an invigorating manicure & pedicure combo.',
     shortDescription: 'Full Body Rica Waxing + VLCC Facial + Manicure & Pedicure + Threading.',
-    image: '/images/salonline_hero_luxury_1792923326581.jpg',
+    image: '/images/beautiva_hero_luxury_1792923326581.jpg',
     inclusions: [
       'Full Arms & Full Legs Waxing (Choice of Rica or Chocolate)',
       'Underarms Waxing',
@@ -147,7 +147,7 @@ export const products: Product[] = [
     durationMinutes: 90,
     description: 'Clinical-grade oxygen glow infusion utilizing O3+ derma essentials. Gently melts away persistent pollution tan, boosts cellular oxygen absorption, and delivers a reflective glass-like glow.',
     shortDescription: 'O3+ Radiant Glow Derma Facial + O3+ D-Tan Pack + Eye Revitaliser.',
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     inclusions: [
       'O3+ Cleansing foam & enzyme milk',
       'O3+ Micro derma peeling scrub',
@@ -179,7 +179,7 @@ export const products: Product[] = [
     durationMinutes: 85,
     description: 'Inspired by Seoul glass-skin aesthetics. Includes gentle lymphatic ice-globe cryo massage, hyaluronic acid layering, bio-cellulose sheet mask, and jade roller lymphatic drainage.',
     shortDescription: 'Glass Skin Hydration + Cryo Ice Globe Therapy + Peptide Sheet Mask.',
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     inclusions: [
       'Double cleansing with rice water & cleansing oil',
       'Mild enzyme exfoliation',
@@ -211,7 +211,7 @@ export const products: Product[] = [
     durationMinutes: 95,
     description: 'Rich in malic acid from fresh green apples, this botanical package purifies congested pores and smooths tired skin while including a refreshing green apple pedicure.',
     shortDescription: 'SARA Green Apple Detox Facial + Green Apple Spa Pedicure.',
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     inclusions: [
       'SARA Green Apple Purifying Cleanser',
       'Apple seed micro-scrub & steam',
@@ -241,7 +241,7 @@ export const products: Product[] = [
     durationMinutes: 65,
     description: 'Targeted green apple facial focusing exclusively on facial glow, blackhead elimination, skin clarifying, and pore minimization without pedicure.',
     shortDescription: 'SARA Green Apple Purifying Facial + De-Tan Face Pack.',
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     inclusions: [
       'Clarifying apple gel cleanse',
       'Steam & blackhead clearing',
@@ -265,7 +265,7 @@ export const products: Product[] = [
     durationMinutes: 90,
     description: 'An aromatherapy immersion using Blossom Kochhar Aroma Magic Gold & Pearl organic preparations paired with a soothing upper back & neck massage.',
     shortDescription: 'Aroma Magic Gold Facial + Relaxing Back & Shoulder Massage.',
-    image: '/images/salonline_hero_luxury_1792923326581.jpg',
+    image: '/images/beautiva_hero_luxury_1792923326581.jpg',
     inclusions: [
       'Grapefruit cleansing & peppermint gentle scrub',
       'Gold shimmer facial serum acupressure',
@@ -292,7 +292,7 @@ export const products: Product[] = [
     durationMinutes: 85,
     description: 'Targeted skin tightening therapy using Lotus Phyto-Rx anti-ageing botanicals, collagen peptides, de-tan pack, and nourishing hand massage.',
     shortDescription: 'Lotus Phyto-Rx Facial + Collagen Infusion + Tan Removal Pack + Hand Polish.',
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     inclusions: [
       'Phyto-Rx skin firming cleanse',
       'Micro-dermabrasion gentle exfoliation',
@@ -318,7 +318,7 @@ export const products: Product[] = [
     durationMinutes: 80,
     description: 'VLCC Diamond Shine treatment enriched with diamond bhasma and botanical actives to polish away dull skin, paired with under-eye dark circle therapy and pressure-point head massage.',
     shortDescription: 'VLCC Diamond Shine Facial + Under Eye Therapy + Head Massage.',
-    image: '/images/salonline_facial_skincare_1792923326387.jpg',
+    image: '/images/beautiva_facial_skincare_1792923326387.jpg',
     inclusions: [
       'Diamond scrub with diamond dust particles',
       'Detox steam & gentle pore suction',
@@ -344,7 +344,7 @@ export const products: Product[] = [
     durationMinutes: 60,
     description: 'A deep restorative hair treatment that repairs dry, damaged cuticles, restores shine, and soothes the scalp with VLCC botanical oils, followed by a professional blowdry.',
     shortDescription: 'Deep Conditioning Hair Spa + Scalp Massage + Steam + Blowdry.',
-    image: '/images/salonline_hair_spa_1792923327617.jpg',
+    image: '/images/beautiva_hair_spa_1792923327617.jpg',
     inclusions: [
       'Scalp analysis & pre-spa massage',
       'VLCC deep conditioning keratin cream application',
@@ -371,7 +371,7 @@ export const products: Product[] = [
     durationMinutes: 70,
     description: 'Essential everyday maintenance: Full arms & half legs chocolate waxing, gentle Lotus herbal face cleanup, and eyebrow + upper lip threading.',
     shortDescription: 'Full Arms Waxing + Half Legs Waxing + Lotus Cleanup + Threading.',
-    image: '/images/salonline_hero_luxury_1792923326581.jpg',
+    image: '/images/beautiva_hero_luxury_1792923326581.jpg',
     inclusions: [
       'Full Arms Honey Waxing',
       'Half Legs Honey Waxing',
@@ -395,7 +395,7 @@ export const products: Product[] = [
     durationMinutes: 90,
     description: 'High-definition glamour for weddings, cocktail evenings, and family festivities. Includes long-wear waterproof base, eye makeup, customized hairstyle, and saree or lehenga draping.',
     shortDescription: 'HD Party Glamour Look + Hairstyle + Saree/Lehenga Draping.',
-    image: '/images/salonline_bridal_makeup_1792923326741.jpg',
+    image: '/images/beautiva_bridal_makeup_1792923326741.jpg',
     inclusions: [
       'HD foundation base matching skin undertone',
       'Contour, blush, and highlighter blend',
@@ -430,7 +430,7 @@ export const products: Product[] = [
     durationMinutes: 120,
     description: 'Flawless camera-ready makeup designed for ring ceremonies and sangeet celebrations. Features airbrush or 3D HD application, false lashes, designer hair styling, and jewelry setting.',
     shortDescription: '3D HD / Airbrush Makeup + False Lashes + Designer Hairstyle + Draping.',
-    image: '/images/salonline_bridal_makeup_1792923326741.jpg',
+    image: '/images/beautiva_bridal_makeup_1792923326741.jpg',
     inclusions: [
       'Skin prep & primer smoothing',
       'Long-wearing sweat-proof HD / Airbrush base',
@@ -459,7 +459,7 @@ export const products: Product[] = [
     durationMinutes: 180,
     description: 'Our premier bespoke bridal artistry. Includes pre-wedding skin consultation, luxurious 3D HD / Airbrush base, mink lashes, traditional floral or jewel hair styling, double dupatta draping, and touch-up kit.',
     shortDescription: 'Complete 3D HD Bridal Transformation + Lashes + Hairdo + Double Draping.',
-    image: '/images/salonline_bridal_makeup_1792923326741.jpg',
+    image: '/images/beautiva_bridal_makeup_1792923326741.jpg',
     inclusions: [
       'Pre-bridal skin and shade match consultation',
       'Waterproof 18-hour HD / Airbrush bridal base',
@@ -491,7 +491,7 @@ export const products: Product[] = [
     durationMinutes: 45,
     description: 'Expert event hairstyle of your choice: traditional floral bun, mess-free sleek updo, French braid, or side-swept textured styling secured with professional pins and holding spray.',
     shortDescription: 'Classic or Designer Hair Updo / Bun / Braid for events.',
-    image: '/images/salonline_hair_spa_1792923327617.jpg',
+    image: '/images/beautiva_hair_spa_1792923327617.jpg',
     inclusions: [
       'Hair texturizing & backcombing for volume',
       'Pinning and structure setting',
@@ -515,7 +515,7 @@ export const products: Product[] = [
     durationMinutes: 35,
     description: 'Professional ceramic blowdry giving tresses bouncy volume, mirror shine, and lasting shape. Available in out-curl, in-curl, or sleek straight styles.',
     shortDescription: 'Volume Blowdry styling (In-curl, Out-curl, or Sleek).',
-    image: '/images/salonline_hair_spa_1792923327617.jpg',
+    image: '/images/beautiva_hair_spa_1792923327617.jpg',
     inclusions: [
       'Heat protection serum application',
       'Sectional round-brush ceramic blowdry',
@@ -538,7 +538,7 @@ export const products: Product[] = [
     durationMinutes: 45,
     description: 'Gorgeous tong curls, beach waves, or romantic loose curls created with professional tourmaline styling tools and thermal protectants.',
     shortDescription: 'Tourmaline Tong Curls or Mermaid Beach Waves.',
-    image: '/images/salonline_hair_spa_1792923327617.jpg',
+    image: '/images/beautiva_hair_spa_1792923327617.jpg',
     inclusions: [
       'L’Oréal heat shield mist',
       'Precision barrel curling by sections',
@@ -561,7 +561,7 @@ export const products: Product[] = [
     durationMinutes: 40,
     description: 'Silky smooth temporary ceramic flat-iron straightening that eliminates flyaways and leaves hair glass-like and effortlessly sleek.',
     shortDescription: 'Ceramic Iron Temporary Straightening with Gloss Serum.',
-    image: '/images/salonline_hair_spa_1792923327617.jpg',
+    image: '/images/beautiva_hair_spa_1792923327617.jpg',
     inclusions: [
       'Smoothing serum application',
       'Temperature-regulated ceramic flat-iron pass',
@@ -584,7 +584,7 @@ export const products: Product[] = [
     durationMinutes: 90,
     description: 'Traditional Vedic full body polishing with authentic turmeric, sandalwood, saffron, and chickpea flour paste. Restores natural radiance and purifies the skin.',
     shortDescription: 'Full Body Ayurvedic Scrub + Rosewater Compression + Herbal Pack.',
-    image: '/images/salonline_hero_luxury_1792923326581.jpg',
+    image: '/images/beautiva_hero_luxury_1792923326581.jpg',
     inclusions: [
       'Cold-pressed sesame oil gentle body rub',
       'Sandalwood & chickpea ubtan herbal exfoliation',
@@ -600,7 +600,7 @@ export const products: Product[] = [
 
 export const getStoredProducts = (): Product[] => {
   try {
-    const raw = localStorage.getItem('salonline_catalog_products');
+    const raw = localStorage.getItem('beautiva_catalog_products');
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
@@ -613,7 +613,7 @@ export const getStoredProducts = (): Product[] => {
 
 export const saveStoredProducts = (list: Product[]) => {
   try {
-    localStorage.setItem('salonline_catalog_products', JSON.stringify(list));
+    localStorage.setItem('beautiva_catalog_products', JSON.stringify(list));
   } catch {}
 };
 

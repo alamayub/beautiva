@@ -43,7 +43,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
   // Desktop collapsed (icon-only rail) state - persisted in localStorage
   const [isCollapsed, setIsCollapsed] = useState<boolean>(() => {
     try {
-      return localStorage.getItem('salonline_admin_sidebar_collapsed') === 'true';
+      return localStorage.getItem('beautiva_admin_sidebar_collapsed') === 'true';
     } catch {
       return false;
     }
@@ -56,7 +56,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
     setIsCollapsed((prev) => {
       const next = !prev;
       try {
-        localStorage.setItem('salonline_admin_sidebar_collapsed', String(next));
+        localStorage.setItem('beautiva_admin_sidebar_collapsed', String(next));
       } catch {}
       return next;
     });
@@ -164,7 +164,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
               <div className="w-full flex flex-col items-center gap-2">
                 <div 
                   className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#601A24] to-[#3a0d14] border border-[#7A222F]/60 flex items-center justify-center font-bold text-white shadow-xs font-editorial text-lg tracking-wider"
-                  title="Salonline Operations"
+                  title="Beautiva Operations"
                 >
                   S
                 </div>
@@ -183,7 +183,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-editorial text-xl font-bold tracking-tight text-white">
-                      Salonline
+                      Beautiva
                     </span>
                     <span className="text-[10px] uppercase font-mono font-semibold tracking-wider text-[#D47A83] pl-2 border-l border-stone-700">
                       OPS
@@ -460,7 +460,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
 
             {/* Breadcrumb Navigation */}
             <div className="flex items-center gap-1.5 text-xs text-stone-500">
-              <span className="hidden sm:inline font-medium">Salonline Ops</span>
+              <span className="hidden sm:inline font-medium">Beautiva Ops</span>
               <ChevronRight className="w-3.5 h-3.5 hidden sm:inline" />
               <span className="font-bold text-stone-900">{getBreadcrumb()}</span>
               {selectedCity !== 'all' && (

@@ -61,7 +61,7 @@ export interface AcademyStudent {
   progressPercent: number;
   apprenticeshipHours: number;
   status: 'training' | 'apprenticeship' | 'graduated' | 'inquiry';
-  placementStatus: 'pending' | 'placed_salonline' | 'external_salon';
+  placementStatus: 'pending' | 'placed_beautiva' | 'external_salon';
 }
 
 export const initialBookings: BookingRecord[] = [
@@ -533,7 +533,7 @@ export const initialAcademyStudents: AcademyStudent[] = [
     progressPercent: 78,
     apprenticeshipHours: 140,
     status: 'apprenticeship',
-    placementStatus: 'placed_salonline'
+    placementStatus: 'placed_beautiva'
   },
   {
     id: 'acad-2',
@@ -557,7 +557,7 @@ export const initialAcademyStudents: AcademyStudent[] = [
     progressPercent: 95,
     apprenticeshipHours: 210,
     status: 'graduated',
-    placementStatus: 'placed_salonline'
+    placementStatus: 'placed_beautiva'
   },
   {
     id: 'acad-4',

@@ -13,9 +13,12 @@ import { categories } from '../data/categories';
 import { brands } from '../data/brands';
 import { ProductCard } from '../components/products/ProductCard';
 import { SEO } from '../components/common/SEO';
+import { LocationCheckGate } from '../components/booking/LocationCheckGate';
+import { useAppSelector } from '../store/hooks';
 
 export const ServicesPage: React.FC = () => {
   const { category: categorySlug } = useParams<{ category?: string }>();
+  const isLocationConfirmed = useAppSelector((state) => state.booking.isLocationConfirmed);
 
   const currentCategory = useMemo(() => {
     if (!categorySlug) return null;
@@ -74,20 +77,20 @@ export const ServicesPage: React.FC = () => {
             ? currentCategory.description
             : 'Explore verified facial, waxing, manicure, haircut, and bridal packages with single-use sealed kits delivered to your doorstep in Lucknow and Patna.'
         }
-        canonical={currentCategory ? `https://salonline.in/services/${currentCategory.slug}` : 'https://salonline.in/services'}
+        canonical={currentCategory ? `https://beautiva.in/services/${currentCategory.slug}` : 'https://beautiva.in/services'}
         keywords={currentCategory ? `${currentCategory.name.toLowerCase()} at home, ${currentCategory.name.toLowerCase()} salon service, home beauty parlour` : 'salon at home, waxing at home, facial at home, manicure pedicure home service'}
         schema={{
           '@type': 'CollectionPage',
-          name: currentCategory ? `${currentCategory.name} - Salonline` : 'All Salon Services - Salonline',
+          name: currentCategory ? `${currentCategory.name} - Beautiva` : 'All Salon Services - Beautiva',
           description: currentCategory ? currentCategory.description : 'Explore verified doorstep salon services and packages.',
-          url: currentCategory ? `https://salonline.in/services/${currentCategory.slug}` : 'https://salonline.in/services',
+          url: currentCategory ? `https://beautiva.in/services/${currentCategory.slug}` : 'https://beautiva.in/services',
           mainEntity: {
             '@type': 'ItemList',
             itemListElement: filteredProducts.slice(0, 10).map((p, idx) => ({
               '@type': 'ListItem',
               position: idx + 1,
               name: p.title,
-              url: `https://salonline.in/package/${p.slug || p.id}`,
+              url: `https://beautiva.in/package/${p.slug || p.id}`,
             })),
           },
         }}
@@ -109,7 +112,7 @@ export const ServicesPage: React.FC = () => {
         </nav>
 
         {/* Heading Header */}
-        <div className="mb-8">
+        <div className="mb-6">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-editorial font-bold text-stone-900">
             {currentCategory ? currentCategory.name : 'All Salon Services & Packages'}
           </h1>
@@ -119,6 +122,9 @@ export const ServicesPage: React.FC = () => {
               : 'Browse our complete catalog of certified doorstep beauty treatments, herbal skincare, hair nourishment, and occasion styling.'}
           </p>
         </div>
+
+        {/* Step 1: City / Pincode Check Gate */}
+        <LocationCheckGate compact={isLocationConfirmed} />
 
         {/* Category Pills Strip */}
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-6">
@@ -221,8 +227,20 @@ export const ServicesPage: React.FC = () => {
           )}
         </div>
 
-        {/* Products Grid */}
-        {filteredProducts.length === 0 ? (
+        {/* Products Grid (Gated until City/Pincode is confirmed) */}
+        {!isLocationConfirmed ? (
+          <div className="bg-white rounded-2xl border border-stone-200 p-8 sm:p-12 text-center max-w-lg mx-auto my-6 shadow-xs">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#601A24]">
+              Location Verification Required
+            </span>
+            <h3 className="font-editorial font-bold text-stone-900 text-lg mt-1">
+              Confirm your City & PIN code above to browse services
+            </h3>
+            <p className="text-xs text-stone-500 mt-2 leading-relaxed">
+              Because our beauticians travel to your home with sealed kits, we verify serviceability and active stylist availability in your PIN code first.
+            </p>
+          </div>
+        ) : filteredProducts.length === 0 ? (
           <div className="bg-white rounded-xl border border-stone-200 p-12 text-center max-w-md mx-auto">
             <h3 className="font-semibold text-stone-800 text-base">No services found</h3>
             <p className="text-xs text-stone-500 mt-1">

@@ -7,6 +7,7 @@ import { addToCart, updateQuantity } from '../../store/features/cart/cartSlice';
 import { toggleWishlist } from '../../store/features/wishlist/wishlistSlice';
 import { useToast } from '../common/ToastProvider';
 import { formatCurrency } from '../../lib/currency';
+import { formatDuration } from '../../lib/duration';
 
 interface ProductCardProps {
   product: Product;
@@ -26,7 +27,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     e.preventDefault();
     e.stopPropagation();
     dispatch(addToCart({ product }));
-    showToast(`Added ${product.title} to your cart`);
+    showToast(`Added ${product.title} (${formatDuration(product.durationMinutes)}) to booking`);
   };
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
@@ -106,9 +107,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {/* Bottom Price & Add Action */}
         <div className="pt-4 mt-3 border-t border-stone-100 flex items-center justify-between gap-3">
           <div>
-            <div className="flex items-baseline gap-2">
+            <div className="flex items-baseline gap-2 flex-wrap">
               <span className="text-base font-bold text-stone-900 font-mono">
                 {formatCurrency(product.price)}
+              </span>
+              <span className="text-xs font-semibold text-[#601A24] font-mono">
+                · {formatDuration(product.durationMinutes)}
               </span>
               {product.originalPrice > product.price && (
                 <span className="text-xs text-stone-400 line-through font-mono">
@@ -163,9 +167,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           ) : (
             <button
               onClick={handleAddToCart}
-              className="px-3.5 py-1.5 text-xs font-semibold text-[#601A24] bg-stone-100 hover:bg-[#601A24] hover:text-white rounded-lg transition-colors border border-stone-200"
+              className="px-3.5 py-1.5 text-xs font-semibold text-[#601A24] bg-stone-100 hover:bg-[#601A24] hover:text-white rounded-lg transition-colors border border-stone-200 shrink-0"
             >
-              Add to Cart
+              Add Service
             </button>
           )}
         </div>

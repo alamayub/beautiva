@@ -275,7 +275,7 @@ export const AdminBookings: React.FC<AdminBookingsProps> = ({
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
     const dateStamp = startDate || getTodayDateStr();
-    link.setAttribute('download', `salonline_appointments_${cityFilter}_${dateStamp}.csv`);
+    link.setAttribute('download', `beautiva_appointments_${cityFilter}_${dateStamp}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

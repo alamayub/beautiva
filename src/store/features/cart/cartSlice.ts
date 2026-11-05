@@ -9,7 +9,7 @@ interface CartState {
 
 const loadInitialCart = (): CartItem[] => {
   try {
-    const raw = localStorage.getItem('salonline_cart');
+    const raw = localStorage.getItem('beautiva_cart');
     if (raw) return JSON.parse(raw);
   } catch {
     // fallback
@@ -19,7 +19,7 @@ const loadInitialCart = (): CartItem[] => {
 
 const saveCart = (items: CartItem[]) => {
   try {
-    localStorage.setItem('salonline_cart', JSON.stringify(items));
+    localStorage.setItem('beautiva_cart', JSON.stringify(items));
   } catch {
     // ignore
   }

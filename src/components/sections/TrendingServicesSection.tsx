@@ -15,6 +15,7 @@ import { products } from '../../data/products';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { addToCart, updateQuantity, openCartDrawer } from '../../store/features/cart/cartSlice';
 import { formatCurrency } from '../../lib/currency';
+import { formatDuration } from '../../lib/duration';
 import { useToast } from '../common/ToastProvider';
 
 export const TrendingServicesSection: React.FC = () => {
@@ -148,9 +149,12 @@ export const TrendingServicesSection: React.FC = () => {
                 {/* Footer with Price & Add Button */}
                 <div className="p-4 pt-2 border-t border-stone-200/80 bg-white flex items-center justify-between">
                   <div>
-                    <div className="flex items-baseline gap-1.5">
+                    <div className="flex items-baseline gap-1.5 flex-wrap">
                       <span className="font-mono text-base font-bold text-stone-900 tabular-nums">
                         {formatCurrency(product.price)}
+                      </span>
+                      <span className="font-mono text-xs font-semibold text-[#601A24]">
+                        · {formatDuration(product.durationMinutes)}
                       </span>
                       {product.originalPrice > product.price && (
                         <span className="font-mono text-xs text-stone-400 line-through tabular-nums">
@@ -170,10 +174,10 @@ export const TrendingServicesSection: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => handleAdd(product)}
-                      className="px-3.5 py-1.5 bg-white border border-[#601A24] text-[#601A24] hover:bg-[#601A24] hover:text-white rounded-lg text-xs font-bold transition-all shadow-2xs flex items-center gap-1 cursor-pointer"
+                      className="px-3.5 py-1.5 bg-white border border-[#601A24] text-[#601A24] hover:bg-[#601A24] hover:text-white rounded-lg text-xs font-bold transition-all shadow-2xs flex items-center gap-1 cursor-pointer shrink-0"
                     >
                       <Plus className="w-3.5 h-3.5" />
-                      <span>Add</span>
+                      <span>Add Service</span>
                     </button>
                   ) : (
                     <div className="flex items-center bg-[#FAF8F5] border border-stone-300 rounded-lg p-0.5">

@@ -123,7 +123,7 @@ export const AdminStylists: React.FC<AdminStylistsProps> = ({
     setIsModalOpen(false);
     setNewName('');
     setNewPhone('');
-    showToast(`Added ${created.name} to Salonline fleet!`);
+    showToast(`Added ${created.name} to Beautiva fleet!`);
   };
 
   const columns: ColumnDef<StylistRecord>[] = [

@@ -35,7 +35,7 @@ export const ProfilePage: React.FC = () => {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem('salonline_orders');
+      const stored = localStorage.getItem('beautiva_orders');
       if (stored) {
         setOrders(JSON.parse(stored));
       } else {
@@ -58,7 +58,7 @@ export const ProfilePage: React.FC = () => {
                 durationMinutes: 90,
                 description: '',
                 shortDescription: 'Lotus WhiteGlow Skin Whitening Facial + Face & Neck Bleach + Threading.',
-                image: '/images/salonline_hero_luxury_1792923326581.jpg',
+                image: '/images/beautiva_hero_luxury_1792923326581.jpg',
                 inclusions: [],
                 safetyProtocol: []
               },

@@ -5,7 +5,7 @@ import { CustomPackageBuilder } from '../components/sections/CustomPackageBuilde
 import { TransparencyCalculator } from '../components/sections/TransparencyCalculator';
 import { HowItWorksSection } from '../components/sections/HowItWorksSection';
 import { BrandShowcase } from '../components/sections/BrandShowcase';
-import { WhySalonline } from '../components/sections/WhySalonline';
+import { WhyBeautiva } from '../components/sections/WhyBeautiva';
 import { TestimonialsSection } from '../components/sections/TestimonialsSection';
 import { InteractiveFaqSection } from '../components/sections/InteractiveFaqSection';
 import { BeautySchoolBanner } from '../components/sections/BeautySchoolBanner';
@@ -39,7 +39,7 @@ export const HomePage: React.FC = () => {
       <BrandShowcase />
 
       {/* 7. Clinical Hygiene & Trust Standard */}
-      <WhySalonline />
+      <WhyBeautiva />
 
       {/* 8. Verified Local Customer Reviews */}
       <TestimonialsSection />

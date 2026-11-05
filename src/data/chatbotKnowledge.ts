@@ -12,7 +12,7 @@ export interface ChatMessage {
   }>;
 }
 
-export const SALONLINE_SYSTEM_PROMPT = `You are "Beautiva AI Concierge & Operations Copilot", the intelligent assistant for Beautiva (salonline.in).
+export const BEAUTIVA_SYSTEM_PROMPT = `You are "Beautiva AI Concierge & Operations Copilot", the intelligent assistant for Beautiva (beautiva.in).
 Beautiva is India's leading on-demand luxury at-home salon, beauty & academy platform.
 
 Key Information about Beautiva:
@@ -227,7 +227,7 @@ export function generateSmartLocalResponse(
   // 11. Contact Info & Support
   if (q.includes('contact') || q.includes('phone') || q.includes('call') || q.includes('email') || q.includes('address') || q.includes('office') || q.includes('support') || q.includes('help') || q.includes('reach') || q.includes('number')) {
     return {
-      text: `### 📞 Get in Touch with Beautiva\n\nWe are here to assist you 7 days a week from 07:00 AM to 08:30 PM:\n\n* **Call Us:**\n  - [+91 7236851999](tel:+917236851999)\n  - [+91 7007017309](tel:+917007017309)\n* **Email Us:**\n  - [info@salonline.in](mailto:info@salonline.in)\n* **Head Office:**\n  - **Beautiva, Sitkan Enterprises**\n  - P.No 1, KH. NO. 118, NewGulista Colony Faizabad Road, Chinhat, Lucknow, 226028\n* **Follow Us:**\n  - Instagram: [@salonline.in](https://instagram.com/salonline.in)\n  - Facebook: [@salonline.in](https://facebook.com/salonline.in)`,
+      text: `### 📞 Get in Touch with Beautiva\n\nWe are here to assist you 7 days a week from 07:00 AM to 08:30 PM:\n\n* **Call Us:**\n  - [+91 7236851999](tel:+917236851999)\n  - [+91 7007017309](tel:+917007017309)\n* **Email Us:**\n  - [info@beautiva.in](mailto:info@beautiva.in)\n* **Head Office:**\n  - **Beautiva, Sitkan Enterprises**\n  - P.No 1, KH. NO. 118, NewGulista Colony Faizabad Road, Chinhat, Lucknow, 226028\n* **Follow Us:**\n  - Instagram: [@beautiva.in](https://instagram.com/beautiva.in)\n  - Facebook: [@beautiva.in](https://facebook.com/beautiva.in)`,
       actions: [
         { label: 'Go to Contact Page', url: '/contact-us' },
         { label: 'About Beautiva', url: '/about-us' },
@@ -325,7 +325,7 @@ export function generateSmartLocalResponse(
   }
 
   return {
-    text: `### ✨ Welcome to Beautiva AI Concierge!\n\nI can assist you with all our doorstep salon services, pricing, appointments, and academy admissions:\n\n* 💆‍♀️ **Facials & Skincare:** Ask about our VLCC, Lotus, or O3+ luxury treatments.\n* 🍯 **Waxing & Grooming:** Inquire about painless Rica White Chocolate wax.\n* 💇‍♀️ **Hair & Mani-Pedi:** L'Oréal hair spas, SARA crystal pedicures & nail care.\n* 👰 **Bridal Packages:** Learn about 3-session pre-bridal and HD airbrush packages.\n* 📍 **Cities & Speed:** Doorstep coverage in Lucknow, Patna, Kanpur, Gorakhpur, and Varanasi.\n* 📞 **Support:** Reach us at +91 7236851999 or info@salonline.in.\n* 🎓 **Beauty School:** Admissions for Cosmetology and Bridal Masterclasses.\n\nHow can I pamper you today?`,
+    text: `### ✨ Welcome to Beautiva AI Concierge!\n\nI can assist you with all our doorstep salon services, pricing, appointments, and academy admissions:\n\n* 💆‍♀️ **Facials & Skincare:** Ask about our VLCC, Lotus, or O3+ luxury treatments.\n* 🍯 **Waxing & Grooming:** Inquire about painless Rica White Chocolate wax.\n* 💇‍♀️ **Hair & Mani-Pedi:** L'Oréal hair spas, SARA crystal pedicures & nail care.\n* 👰 **Bridal Packages:** Learn about 3-session pre-bridal and HD airbrush packages.\n* 📍 **Cities & Speed:** Doorstep coverage in Lucknow, Patna, Kanpur, Gorakhpur, and Varanasi.\n* 📞 **Support:** Reach us at +91 7236851999 or info@beautiva.in.\n* 🎓 **Beauty School:** Admissions for Cosmetology and Bridal Masterclasses.\n\nHow can I pamper you today?`,
     actions: [
       { label: 'Browse All Services', url: '/services' },
       { label: 'Book VLCC Package (₹996)', url: '/package/vlcc-facial-package' },

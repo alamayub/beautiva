@@ -16,7 +16,7 @@ export const OffersPage: React.FC = () => {
       <SEO
         title="Beauty Offers, Salon Discounts & Festive Deals"
         description="Save up to 43% on doorstep beauty services, bridal glow packages, VLCC facials, and waxing combos in Lucknow, Patna, and Kanpur. Free safety kits."
-        canonical="https://salonline.in/offers"
+        canonical="https://beautiva.in/offers"
         keywords="salon offers, beauty parlour discount, facial deals, bridal package offer, Lucknow parlour deals"
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

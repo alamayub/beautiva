@@ -1,13 +1,13 @@
-# Salonline.in — Premium Beauty & Salon E-commerce Platform
+# Beautiva.in — Premium Beauty & Salon E-commerce Platform
 
-A modern, production-grade React web platform reconstructing **Salonline.in** (operated by Sitkan Enterprises, Lucknow) with a high-end editorial beauty aesthetic and service-discovery hierarchy inspired by leading at-home salon platforms.
+A modern, production-grade React web platform reconstructing **Beautiva.in** (operated by Sitkan Enterprises, Lucknow) with a high-end editorial beauty aesthetic and service-discovery hierarchy inspired by leading at-home salon platforms.
 
 ---
 
 ## 💎 Features & Capabilities
 
 1. **Brand Identity & Real Business Offerings**:
-   - Preserves Salonline's genuine catalog: VLCC Facial Packages, Lotus WhiteGlow, ALL IN 1 Package, Blossom Aroma Magic, SARA Green Apple, Korean Glass-Skin, O3+ Glowing Treatment, HD Party & Bridal Artistry.
+   - Preserves Beautiva's genuine catalog: VLCC Facial Packages, Lotus WhiteGlow, ALL IN 1 Package, Blossom Aroma Magic, SARA Green Apple, Korean Glass-Skin, O3+ Glowing Treatment, HD Party & Bridal Artistry.
    - Genuine verified pricing, original crossed-out prices, and up to 43% savings.
    - Operating across **Lucknow, Patna, Kanpur, Gorakhpur, and Varanasi**.
    - Preserves authentic corporate data: Sitkan Enterprises, Faizabad Road, Chinhat, Lucknow, UP – 226028.
@@ -32,7 +32,7 @@ A modern, production-grade React web platform reconstructing **Salonline.in** (o
    - **Regional City Analytics (`/admin/analytics`)**: CSAT metrics (4.92★), dispatch latency, repeat appointment frequencies (68%), and city volume breakdown.
 
 4. **Academy & Career Portals**:
-   - **Salonline Beauty School**: Accredited diploma programs in Cosmetology, Advanced Bridal Makeup, Hair Technology, and Nail Art.
+   - **Beautiva Beauty School**: Accredited diploma programs in Cosmetology, Advanced Bridal Makeup, Hair Technology, and Nail Art.
    - **Stylist Careers**: Transparent onboarding portal for women beauty professionals earning ₹35,000–₹50,000/month.
 
 5. **Customer & Corporate Content**:

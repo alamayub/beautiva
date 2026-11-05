@@ -48,7 +48,7 @@ export const ContactUsPage: React.FC = () => {
           name: 'Contact Beautiva Customer Concierge',
           url: 'https://beautiva.in/contact-us',
           telephone: '+91-7236851999',
-          email: 'support@salonline.in',
+          email: 'support@beautiva.in',
         }}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,8 +128,8 @@ export const ContactUsPage: React.FC = () => {
                   <span>Write Us</span>
                 </span>
                 <div className="pl-5">
-                  <a href="mailto:info@salonline.in" className="text-sm font-medium text-stone-900 hover:text-[#601A24] transition-colors">
-                    info@salonline.in
+                  <a href="mailto:info@beautiva.in" className="text-sm font-medium text-stone-900 hover:text-[#601A24] transition-colors">
+                    info@beautiva.in
                   </a>
                   <span className="text-[11px] text-stone-400 block pt-1">
                     For booking queries, partnerships, and customer support
@@ -160,7 +160,7 @@ export const ContactUsPage: React.FC = () => {
                 </span>
                 <div className="flex flex-col sm:flex-row gap-2">
                   <a
-                    href="https://instagram.com/salonline.in"
+                    href="https://instagram.com/beautiva.in"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center gap-2.5 p-3 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 transition-colors group cursor-pointer"
@@ -170,12 +170,12 @@ export const ContactUsPage: React.FC = () => {
                     </div>
                     <div>
                       <span className="text-[10px] font-semibold text-stone-500 uppercase tracking-wider block">Instagram</span>
-                      <span className="text-xs font-bold text-stone-900 font-mono">/salonline.in</span>
+                      <span className="text-xs font-bold text-stone-900 font-mono">/beautiva.in</span>
                     </div>
                   </a>
 
                   <a
-                    href="https://facebook.com/salonline.in"
+                    href="https://facebook.com/beautiva.in"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center gap-2.5 p-3 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 transition-colors group cursor-pointer"
@@ -185,7 +185,7 @@ export const ContactUsPage: React.FC = () => {
                     </div>
                     <div>
                       <span className="text-[10px] font-semibold text-stone-500 uppercase tracking-wider block">Facebook</span>
-                      <span className="text-xs font-bold text-stone-900 font-mono">/salonline.in</span>
+                      <span className="text-xs font-bold text-stone-900 font-mono">/beautiva.in</span>
                     </div>
                   </a>
                 </div>

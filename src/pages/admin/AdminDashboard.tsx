@@ -21,7 +21,7 @@ export const AdminDashboard: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState<string>('all');
   const [bookings, setBookings] = useState<BookingRecord[]>(() => {
     try {
-      const stored = localStorage.getItem('salonline_admin_bookings');
+      const stored = localStorage.getItem('beautiva_admin_bookings');
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -34,7 +34,7 @@ export const AdminDashboard: React.FC = () => {
 
   const [stylists, setStylists] = useState<StylistRecord[]>(() => {
     try {
-      const stored = localStorage.getItem('salonline_admin_stylists');
+      const stored = localStorage.getItem('beautiva_admin_stylists');
       if (stored) return JSON.parse(stored);
     } catch {}
     return initialStylists;
@@ -42,7 +42,7 @@ export const AdminDashboard: React.FC = () => {
 
   const [inventory, setInventory] = useState<InventoryItem[]>(() => {
     try {
-      const stored = localStorage.getItem('salonline_admin_inventory');
+      const stored = localStorage.getItem('beautiva_admin_inventory');
       if (stored) return JSON.parse(stored);
     } catch {}
     return initialInventory;
@@ -51,19 +51,19 @@ export const AdminDashboard: React.FC = () => {
   // Sync to local storage
   useEffect(() => {
     try {
-      localStorage.setItem('salonline_admin_bookings', JSON.stringify(bookings));
+      localStorage.setItem('beautiva_admin_bookings', JSON.stringify(bookings));
     } catch {}
   }, [bookings]);
 
   useEffect(() => {
     try {
-      localStorage.setItem('salonline_admin_stylists', JSON.stringify(stylists));
+      localStorage.setItem('beautiva_admin_stylists', JSON.stringify(stylists));
     } catch {}
   }, [stylists]);
 
   useEffect(() => {
     try {
-      localStorage.setItem('salonline_admin_inventory', JSON.stringify(inventory));
+      localStorage.setItem('beautiva_admin_inventory', JSON.stringify(inventory));
     } catch {}
   }, [inventory]);
 

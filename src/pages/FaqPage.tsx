@@ -127,7 +127,7 @@ export const FaqPage: React.FC = () => {
         <div className="p-6 rounded-2xl bg-white border border-stone-200 text-center space-y-2">
           <h3 className="font-semibold text-stone-900 text-sm">Have more questions?</h3>
           <p className="text-xs text-stone-500">
-            Reach out to our customer care team anytime at +91 7236851999 / +91 7007017309 or info@salonline.in
+            Reach out to our customer care team anytime at +91 7236851999 / +91 7007017309 or info@beautiva.in
           </p>
           <Link
             to="/contact-us"

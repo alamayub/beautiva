@@ -78,8 +78,8 @@ export const Footer: React.FC = () => {
 
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#D47A83] shrink-0" />
-                <a href="mailto:info@salonline.in" className="hover:text-white transition-colors">
-                  info@salonline.in
+                <a href="mailto:info@beautiva.in" className="hover:text-white transition-colors">
+                  info@beautiva.in
                 </a>
               </div>
 
@@ -89,24 +89,24 @@ export const Footer: React.FC = () => {
                 </span>
                 <div className="flex flex-wrap items-center gap-2.5">
                   <a
-                    href="https://instagram.com/salonline.in"
+                    href="https://instagram.com/beautiva.in"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-800/80 hover:bg-stone-700 text-stone-300 hover:text-white text-xs border border-stone-700 transition-colors"
                     aria-label="Follow Beautiva on Instagram"
                   >
                     <Instagram className="w-3.5 h-3.5 text-rose-400" />
-                    <span className="font-mono">/salonline.in</span>
+                    <span className="font-mono">/beautiva.in</span>
                   </a>
                   <a
-                    href="https://facebook.com/salonline.in"
+                    href="https://facebook.com/beautiva.in"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-800/80 hover:bg-stone-700 text-stone-300 hover:text-white text-xs border border-stone-700 transition-colors"
                     aria-label="Follow Beautiva on Facebook"
                   >
                     <Facebook className="w-3.5 h-3.5 text-blue-400" />
-                    <span className="font-mono">/salonline.in</span>
+                    <span className="font-mono">/beautiva.in</span>
                   </a>
                 </div>
               </div>
