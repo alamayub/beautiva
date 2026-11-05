@@ -49,7 +49,12 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 py-12 border-b border-stone-800">
           {/* Brand & Address */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="inline-block">
+            <Link to="/" className="inline-flex items-center gap-2.5">
+              <img
+                src="/images/beautiva_icon.jpg"
+                alt="Beautiva Logo"
+                className="w-8 h-8 rounded-lg object-cover border border-stone-700"
+              />
               <span className="font-editorial text-2xl font-bold tracking-tight text-white">
                 Beautiva<span className="text-[#D47A83]">.in</span>
               </span>

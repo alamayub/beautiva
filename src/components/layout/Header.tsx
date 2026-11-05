@@ -70,7 +70,12 @@ export const Header: React.FC = () => {
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
 
-              <Link to="/" className="flex items-center gap-2 group">
+              <Link to="/" className="flex items-center gap-2.5 group">
+                <img
+                  src="/images/beautiva_logo.jpg"
+                  alt="Beautiva Logo"
+                  className="w-8 h-8 rounded-lg object-cover border border-stone-200 shadow-2xs"
+                />
                 <span className="font-editorial text-2xl font-bold tracking-tight text-[#601A24] group-hover:text-[#4a121a] transition-colors whitespace-nowrap">
                   Beautiva<span className="text-[#D47A83]">.in</span>
                 </span>

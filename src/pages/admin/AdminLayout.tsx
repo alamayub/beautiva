@@ -162,12 +162,12 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
             {isCollapsed ? (
               // Collapsed Header View (Icon + Expand Toggle)
               <div className="w-full flex flex-col items-center gap-2">
-                <div 
-                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#601A24] to-[#3a0d14] border border-[#7A222F]/60 flex items-center justify-center font-bold text-white shadow-xs font-editorial text-lg tracking-wider"
+                <img
+                  src="/images/beautiva_icon.jpg"
+                  alt="Beautiva Operations"
                   title="Beautiva Operations"
-                >
-                  S
-                </div>
+                  className="w-10 h-10 rounded-xl object-cover border border-[#7A222F]/60 shadow-xs"
+                />
                 <button
                   onClick={toggleCollapse}
                   className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg text-stone-400 hover:text-white hover:bg-[#261F21] transition-colors"
@@ -180,18 +180,25 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
             ) : (
               // Expanded Header View
               <>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-editorial text-xl font-bold tracking-tight text-white">
-                      Beautiva
-                    </span>
-                    <span className="text-[10px] uppercase font-mono font-semibold tracking-wider text-[#D47A83] pl-2 border-l border-stone-700">
-                      OPS
-                    </span>
+                <div className="flex items-center gap-2.5">
+                  <img
+                    src="/images/beautiva_icon.jpg"
+                    alt="Beautiva"
+                    className="w-9 h-9 rounded-xl object-cover border border-[#7A222F]/60 shrink-0"
+                  />
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-editorial text-xl font-bold tracking-tight text-white">
+                        Beautiva
+                      </span>
+                      <span className="text-[10px] uppercase font-mono font-semibold tracking-wider text-[#D47A83] pl-2 border-l border-stone-700">
+                        OPS
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-stone-400 mt-0.5 truncate max-w-[140px]">
+                      Sitkan Enterprises Console
+                    </p>
                   </div>
-                  <p className="text-[11px] text-stone-400 mt-0.5 truncate max-w-[150px]">
-                    Sitkan Enterprises Console
-                  </p>
                 </div>
                 <div className="flex items-center gap-1">
                   {/* Desktop collapse toggle */}
